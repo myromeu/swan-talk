@@ -1,54 +1,4 @@
-#summary One-sentence summary of this page.
 
-
-= Introduction =
-
- SWAN LAN Chat is a tiny and easy to use instant messaging software. Users can initiate their respective chat -”PUBLIC & PRIVATE” in corresponding chat rooms. Written in Python Language. Swan chat is a LAN based chat messenger.Our project is an example of a chat server. It is made up of 2 applications the client application, which runs on the user’s Pc and server application, which runs on any Pc on the network. To start chatting client should get connected to server where they can practice two kinds of chatting, public one (message is broadcasted to all connected users) and private one (between any 2 users only) and during the last one security measures were taken. 
-
-
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
-
- LAN Networks 
-
-             A LAN network will allow computers in a home or office to talk to one another, pass files, use a common database, and share a printer or fax machine, to name a few advantages. A high-speed Internet account can also be shared on a LAN to provide online access to all computers connected to the network. 
-
-             Most local area networks are built with relatively inexpensive hardware such as Ethernet cables, network adapters, and hubs. Wireless LAN and other more advanced LAN hardware options also exist. 
-
-    Protocols used 
-     TCP 
-
-              TCP (the “Transmission Control Protocol “) has the responsibility for breaking up t he message       into datagrams, reassembling them at the other end, resending anything that gets lost, and putting things back in the right order. It may seem that TCP is doing all the work. And in small network it is true. With TCP, there is no maximum message length. When a message is passed to the TCP protocol, if it is too large to be sent in one peace, the message is broken up into chunks or packets and sent one at a time to the destination address. The TCP packet contains the addressing information. The TCP message also contains a packet number and total number of packets. 
-
-     IP 
-
-                As the number of computers networked become larger, a system becomes necessary to give remote computers the capability to recognize other remote computers; thus the IP addressing method was born. Therefore, simply an IP address uniquely identifies any computer connected to a network. This address is made up of 32 bits divided into 4 four bytes. But since the number of connected computers is too large and since it is difficult to remember all their IP addresses, the Domain Name Service (DNS) was designed .
-
-
-
-      Client-Server Application 
-
-                        Client-server software architecture is versatile and flexible in today’s fast changing IT landscape. It is modular in structure and relies on messaging services for communication between components. They were designed to improve flexibility, usability, scalability, and interoperability. Software flexibility implies the ability for a program to change easily according to different users and different system requirements. 
-                 When the program wishes to use TCP to exchange data, one of the programs should take the role of a client while the other must take the role of a server. The client application initiates what is called active open.An environment in which the application processing is divided between client workstations and servers. It implies the use of desktop computers interacting with servers in a network in contrast to processing everything in a large centralized mainframe. 
-
-
-       The server side would follow these steps: 
-
-        1.Listen for incoming connections from clients 
-        2. Accept the client connection 
-        3.Send and receive information 
-
-       In case of the client, these steps are followed: 
-
-        1. Specify the address and service port of the server program 
-        2. Establish the connection with the server 
-        3.Send and receive information 
 
 
 #summary One-sentence summary of this page.
@@ -173,8 +123,6 @@ PyQt4
       7. widgets. The method names as "setText" are very easy to understand. 
 
     
-
-
 
 
 
