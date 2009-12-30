@@ -1,6 +1,5 @@
 
 
-
 #summary One-sentence summary of this page.
 
 
@@ -122,9 +121,23 @@ PyQt4
      
       7. widgets. The method names as "setText" are very easy to understand. 
 
+
+ISSUES:
+
+1. The server crashes into a segmentation fault whenever one or more clients close their talk page.
+2. closing the talk page does not disconnect the user
+3. once the talk page is closed the user cannot revive it for a new chat
+
+
+
+                                                             
+ Conclusion
+                   
+        The primary goal of this  project is to give an idea about LAN Chat. This project has given us an in depth information about LAN and its applications in day today life. If Local Area Network lives up to its potential, it will revolutionize the way people interact with information technology. This project offers several benefits due to the use of simple and easy to understand tools like qt4 designer. This project is developed in Python ,which is easy to read, learn, scales well, performs well for being interpreted, and is incredibly well-documented.
+
+
+
     
-
-
 
 
 
