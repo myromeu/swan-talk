@@ -1,10 +1,30 @@
-
 #summary One-sentence summary of this page.
 
 
-= Introduction =
 
- SWAN LAN Chat is a tiny and easy to use instant messaging software. Users can initiate their respective chat -”PUBLIC & PRIVATE” in corresponding chat rooms. Written in Python Language. Swan chat is a LAN based chat messenger.Our project is an example of a chat server. It is made up of 2 applications the client application, which runs on the user’s Pc and server application, which runs on any Pc on the network. To start chatting client should get connected to server where they can practice two kinds of chatting, public one (message is broadcasted to all connected users) and private one (between any 2 users only) and during the last one security measures were taken. 
+
+                                        = CONTENTS =
+
+     1. Introduction
+     2. LAN Netwok
+     3. Protocals used
+        3.1 TCP
+        3.2 IP
+     4. Client-Server Application
+     5. Framework
+        5.1 Twisted 8.2.0-3
+     6. Language used
+        6.1 Python
+     7. PyQt4
+     8. Future Enhancements
+     9. Conclusion
+
+
+
+
+             = Introduction =
+
+                  SWAN LAN Chat is a tiny and easy to use instant messaging software. Users can initiate their respective chat -”PUBLIC & PRIVATE” in corresponding chat rooms. Written in Python Language. Swan chat is a LAN based chat messenger.Our project is an example of a chat server. It is made up of 2 applications the client application, which runs on the user’s Pc and server application, which runs on any Pc on the network. To start chatting client should get connected to server where they can practice two kinds of chatting, public one (message is broadcasted to all connected users) and private one (between any 2 users only) and during the last one security measures were taken. 
 
 
 
@@ -137,8 +157,6 @@ Add your content here.  Format your content with:
 
 
     
-
-
 
 
 
