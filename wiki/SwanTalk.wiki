@@ -3,7 +3,7 @@
 
 
 
-                                        = CONTENTS =
+                       = CONTENTS =
 
      1. Introduction
      2. LAN Netwok
@@ -157,8 +157,6 @@ Add your content here.  Format your content with:
 
 
     
-
-
 
 
 
