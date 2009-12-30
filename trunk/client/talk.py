@@ -13,13 +13,14 @@ from twisted.internet.protocol import Protocol, ClientFactory
 import qt4reactor
 
 class Talk_Page(QtGui.QMainWindow):
-    def __init__(self,parent=None):
+    def __init__(self,trns,parent=None):
 	QtGui.QWidget.__init__(self,parent)
-	self.setupUi(self)
+	self.setupUi(self,trns)
 	
-    def setupUi(self, MainWindow):
+    def setupUi(self,MainWindow,trans):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(374, 501)
+	self.trns=trans
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -50,7 +51,10 @@ class Talk_Page(QtGui.QMainWindow):
 	#QtCore.QObject.connect(self.lineEdit,QtCore.SIGNAL("returnPressed()"),self.entr)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-   
+    def closeEvent(self,e):
+	self.trns.write("lost")	   
+
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Talk Page", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))

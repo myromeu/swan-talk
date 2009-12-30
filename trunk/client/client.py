@@ -87,7 +87,7 @@ def Send_Details():						##called when chat button is clicked
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
 		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__() 
 		connection.transport.write(data)
-		talk_page=Talk_Page(GUI)
+		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()
 		talk_list={}
 		talk_list['CommonRoom']=(talk_page.textBrowser,talk_page.lineEdit)

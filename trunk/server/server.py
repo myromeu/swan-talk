@@ -100,7 +100,9 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			        GUI.textBrowser_2.append(self.username+">>>"+packet[1])
 			except:
 				pass
-	
+	elif packet[0]=="lost":
+		self.transport.loseConnection()
+
 class EchoFactory(Factory):							##inherits Factory class
 	protocol = Echo								##define protocol as Echo
 	def __init__(self):
