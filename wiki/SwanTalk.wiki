@@ -6,8 +6,11 @@
      = CONTENTS =
 
        1. Introduction
+
        2. LAN Netwok
+
        3. Protocals used
+
         3.1 TCP
         3.2 IP
       4. Client-Server Application
@@ -152,8 +155,6 @@
 
 
     
-
-
 
 
 
