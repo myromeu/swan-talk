@@ -10,6 +10,7 @@ GUI=Swan_Server()
 GUI.show()
 reactor=qt4reactor.install()
 string=""
+#user class
 class User:
 
 	def __init__(self):
