@@ -15,7 +15,7 @@ class Swan_Server(QtGui.QMainWindow):
 	self.setupUi(self)
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(646,366)
+        MainWindow.resize(340,260)
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
