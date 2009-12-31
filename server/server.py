@@ -81,7 +81,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    return
 		user_base.addUser(username,status_message,self.transport)			##goto addUser and append new user to user_list
 		string=string+">>:"+username+">>>>("+status_message+")"
-		for j in user_base.users_list:
+		
 			
 		if string!="populate_list":
 			
