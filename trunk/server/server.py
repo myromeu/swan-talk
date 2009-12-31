@@ -16,8 +16,8 @@ class User:
 	def __init__(self):
 		self.users_list=[]
 
-	def addUser(self,user_name,tp):
-		self.users_list.append((user_name,tp))				##username and transport is appended to users_list
+	def addUser(self,user_name,stat,tp):
+		self.users_list.append((user_name,tp,stat))				##username and transport is appended to users_list
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
 	def removeUser(self,name):						##called to remove user from users_list
@@ -61,6 +61,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	print "printing packet",packet
 	if packet[0]=="user_details":
 		username=packet[1]
+		status_message=packet[2]
 		print "username",username
 		GUI.textBrowser_2.append("User name :"+username)
 		self.username=username
@@ -70,7 +71,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			users_poplast.append(i)			
 		for i in users_poplast:
 			if i[0]!=username:
-			    string=string+">>:"+i[0]				##refresh string 
+			    string=string+">>:"+i[0]+">>>>("+i[2]+")"				##refresh string 
 			else:
 			    self.flag=0
 			    self.transport.write("Already existing user")
@@ -78,8 +79,8 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    self.transport.loseConnection()			##connection rejected if user name already exists
 			    GUI.textBrowser_2.append(" disconnecting "+username)
 			    return
-		user_base.addUser(username,self.transport)			##goto addUser and append new user to user_list
-		string=string+">>:"+username
+		user_base.addUser(username,status_message,self.transport)			##goto addUser and append new user to user_list
+		string=string+">>:"+username+">>>>("+status_message+")"
 		for j in user_base.users_list:
 			print j
 		if string!="populate_list":
