@@ -31,7 +31,7 @@ user_base=User()
 
 class Echo(Protocol):								##Protocols for new connection,connection lost,data received are defined here.This 											  class inherits Protocol class
     def connectionMade(self):
-	print "connection"
+	
 	GUI.textBrowser_2.append("connection")
         self.factory.numProtocols = self.factory.numProtocols+1 
 	if self.factory.numProtocols > int(GUI.lineEdit_2.text().__str__().__str__()):
@@ -44,7 +44,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
 		user_base.removeUser(self.username)
-	print self.username
+	
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	
 	string="populate_list"
@@ -56,13 +56,13 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
     def dataReceived(self, data):						##called when data is received from client
 	global string
 	self.flag=1
-	print "data received",data
+	
 	packet=data.split('>>:')						##splitting data at >>:
-	print "printing packet",packet
+	
 	if packet[0]=="user_details":
 		username=packet[1]
 		status_message=packet[2]
-		print "username",username
+		
 		GUI.textBrowser_2.append("User name :"+username)
 		self.username=username
 		string="populate_list"
@@ -82,9 +82,9 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		user_base.addUser(username,status_message,self.transport)			##goto addUser and append new user to user_list
 		string=string+">>:"+username+">>>>("+status_message+")"
 		for j in user_base.users_list:
-			print j
+			
 		if string!="populate_list":
-			print "string",string
+			
 			for j in user_base.users_list:
 				j[1].write(string)				##send string to all users
 	elif packet[0]=="chat":							##packet[0] is chat when chatting

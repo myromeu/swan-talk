@@ -16,22 +16,22 @@ GUI.pushButton_3.setEnabled(False)
 class Echo(Protocol):						##to build protocol
 
    def dataReceived(self, data):				##called when data is received
-	print "data",data
+	
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')			##remove "populate_list" to get user names
 		GUI.listWidget.clear()
 		j=0
-		print packet
+		
 		for i in packet:
 			tr=i.split(">>>>")
 			username=tr[0]
-			print "username detail",tr
+			
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username+tr[1], None, QtGui.QApplication.UnicodeUTF8))
 			j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
-		print "agggggggggggggggggggggggggggg"	
+			
 	elif packet[0]=="chat":
 		convers=packet[1].split(":)")
 		if convers.__len__()>1:
@@ -69,7 +69,7 @@ class Echo(Protocol):						##to build protocol
 		else :
 			pass
 
-		print "packet1",packet[1],"codfd",convers
+		
 		if packet[2] not in talk_list:			##if user not in user_list
 			current_index=packet[2]			##current_index set to user name
 			tab = QtGui.QWidget()
@@ -99,7 +99,7 @@ class EchoClientFactory(ClientFactory):
         GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", "Started to connect.", None, QtGui.QApplication.UnicodeUTF8))
     
     def buildProtocol(self, addr):				##to set protocol as Echo
-        print 'Connected.'
+       
 	GUI.pushButton_3.setEnabled(True)
 	GUI.pushButton_2.setEnabled(False)
         return Echo()
@@ -126,7 +126,7 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():						##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index
-	print GUI.lineEdit.text().__str__().__str__()
+
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
 		stat=GUI.textEdit.toPlainText().__str__().__str__()
 		if stat=="Set your status message here":
