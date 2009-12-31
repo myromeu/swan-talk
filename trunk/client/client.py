@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 from talk import *
 import qt4reactor
 from swan import*
+import smileys_rc
 
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
@@ -31,6 +32,43 @@ class Echo(Protocol):						##to build protocol
 		GUI.tabWidget.setCurrentIndex(0)
 		print "agggggggggggggggggggggggggggg"	
 	elif packet[0]=="chat":
+		convers=packet[1].split(":)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/smileys/Desktop/smileys_small/smile.png\" />"+convers[i]
+		else :
+			string=packet[1]
+		convers=string.split(":D")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/smileys/Desktop/smileys_small/laugh.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":(")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/smileys/Desktop/smileys_small/sad.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/smileys/Desktop/smileys_small/wink.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":P")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/smileys/Desktop/smileys_small/goofy.png\" />"+convers[i]
+		else :
+			pass
+
+		print "packet1",packet[1],"codfd",convers
 		if packet[2] not in talk_list:			##if user not in user_list
 			current_index=packet[2]			##current_index set to user name
 			tab = QtGui.QWidget()
@@ -49,7 +87,9 @@ class Echo(Protocol):						##to build protocol
         		talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", packet[2], None, QtGui.QApplication.UnicodeUTF8))
 			QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
 			talk_list[packet[2]]=(textBrowser,lineEdit)
-		talk_list[packet[2]][0].append(packet[3]+": "+packet[1])	
+			
+		talk_list[packet[2]][0].append(packet[3]+": "+string)
+		
   
 	
 class EchoClientFactory(ClientFactory):
