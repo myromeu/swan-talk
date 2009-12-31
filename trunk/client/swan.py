@@ -34,7 +34,7 @@ class Swan(QtGui.QMainWindow):
         self.Main_page.setObjectName("Main_page")
         self.textBrowser = QtGui.QTextBrowser(self.Main_page)
         self.textBrowser.setGeometry(QtCore.QRect(0, 10, 161, 181))
-        self.textBrowser.setStyleSheet("color: rgb(0, 85, 255);")
+        self.textBrowser.setStyleSheet("color: rgb(0, 100, 255);")
         self.textBrowser.setFrameShape(QtGui.QFrame.NoFrame)
         self.textBrowser.setFrameShadow(QtGui.QFrame.Plain)
         self.textBrowser.setLineWidth(0)

@@ -20,6 +20,7 @@ class Talk_Page(QtGui.QMainWindow):
     def setupUi(self,MainWindow,trans):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(374, 501)
+	MainWindow.setGeometry(400,0,374,501)
 	self.trns=trans
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -52,7 +53,8 @@ class Talk_Page(QtGui.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def closeEvent(self,e):
-	self.trns.write("lost")	   
+	self.trns.write("lost")
+	#print "hhhhhhhhhhhhhhhhhhhhhhhhhhiiiiiiiiiiiiiiiiiiiiiii"	   
 
 
     def retranslateUi(self, MainWindow):
