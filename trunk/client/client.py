@@ -28,6 +28,7 @@ class Echo(Protocol):						##to build protocol
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
 			j=j+1
+		GUI.tabWidget.setCurrentIndex(0)	
 	elif packet[0]=="chat":
 		if packet[2] not in talk_list:			##if user not in user_list
 			current_index=packet[2]			##current_index set to user name
@@ -107,7 +108,7 @@ def Connect():							##called when connect button is clicked
 	GUI.lineEdit_3.setEnabled(False)
 	GUI.lineEdit_2.setEnabled(False)
 	GUI.lineEdit.setEnabled(True)				##to connect again from the same window if the user is already logged in
-
+	GUI.tabWidget.setCurrentIndex(1)
 def Close(index):
 	global talk_page,talk_list
 	text=talk_page.tabWidget.tabText (index)
