@@ -84,8 +84,10 @@ class EchoClientFactory(ClientFactory):
 def Send_Details():						##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index
 	print GUI.lineEdit.text().__str__().__str__()
+	print "hello"
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
-		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__() 
+		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+GUI.lineEdit_4.text().__str__().__str__()
+		print data		
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()

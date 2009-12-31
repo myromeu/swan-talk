@@ -14,11 +14,18 @@ class User:
 
 	def __init__(self):
 		self.users_list=[]
+		self.users_status=[]
 
 	def addUser(self,user_name,tp):
 		self.users_list.append((user_name,tp))				##username and transport is appended to users_list
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
+	
+	def addStatus(self,status,tp):
+		global users_status		
+		self.users_status.append((status,tp))
+		
+	
 	def removeUser(self,name):						##called to remove user from users_list
 		GUI.textBrowser_2.append(name+" : loged out ")	
 		temp=[]
@@ -53,12 +60,14 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	
     def dataReceived(self, data):						##called when data is received from client
 	global string
+	global status
 	self.flag=1
 	print "data received",data
 	packet=data.split('>>:')						##splitting data at >>:
 	print "printing packet",packet
 	if packet[0]=="user_details":
 		username=packet[1]
+		status=packet[2]
 		print "username",username
 		GUI.textBrowser_2.append("User name :"+username)
 		self.username=username
@@ -77,6 +86,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    GUI.textBrowser_2.append(" disconnecting "+username)
 			    return
 		user_base.addUser(username,self.transport)			##goto addUser and append new user to user_list
+		user_base.addStatus(status,self.transport)		
 		string=string+">>:"+username
 		for j in user_base.users_list:
 			print j

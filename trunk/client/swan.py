@@ -92,16 +92,27 @@ selection-background-color: rgb(0, 85, 255);""")
         self.label = QtGui.QLabel(self.tab_2)
         self.label.setGeometry(QtCore.QRect(20, 60, 53, 15))
         self.label.setObjectName("label")
-        self.textEdit = QtGui.QTextEdit(self.tab_2)
-        self.textEdit.setGeometry(QtCore.QRect(20, 150, 271, 31))
-        self.textEdit.setObjectName("textEdit")
-	self.textEdit.setText("Set your status message here")
+
+        #self.textEdit = QtGui.QTextEdit(self.tab_2)
+        #self.textEdit.setGeometry(QtCore.QRect(20, 150, 271, 31))
+        #self.textEdit.setObjectName("textEdit")
+	#self.textEdit.setText("Set your status message here")
+
         self.label_2 = QtGui.QLabel(self.tab_2)
         self.label_2.setGeometry(QtCore.QRect(20, 130, 101, 16))
         self.label_2.setObjectName("label_2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab = QtGui.QWidget()
         self.tab.setObjectName("tab")
+
+
+
+	self.lineEdit_4 = QtGui.QLineEdit(self.tab_2)
+        self.lineEdit_4.setGeometry(QtCore.QRect(20, 150, 271, 31))
+        self.lineEdit_4.setObjectName("lineEdit_4")
+	self.lineEdit_4.setText("Set your status message here")
+
+
         self.lineEdit_2 = QtGui.QLineEdit(self.tab)
         self.lineEdit_2.setGeometry(QtCore.QRect(20, 40, 261, 31))
         self.lineEdit_2.setObjectName("lineEdit_2")
