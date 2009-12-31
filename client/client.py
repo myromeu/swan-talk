@@ -24,10 +24,11 @@ class Echo(Protocol):						##to build protocol
 		j=0
 		print packet
 		for i in packet:
-			username=i
-			print i
+			tr=i.split(">>>>")
+			username=tr[0]
+			print "username detail",tr
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
-        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
+        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username+tr[1], None, QtGui.QApplication.UnicodeUTF8))
 			j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
 		print "agggggggggggggggggggggggggggg"	
@@ -127,7 +128,10 @@ def Send_Details():						##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index
 	print GUI.lineEdit.text().__str__().__str__()
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
-		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__() 
+		stat=GUI.textEdit.toPlainText().__str__().__str__()
+		if stat=="Set your status message here":
+			stat=""
+		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat 
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()
@@ -161,7 +165,7 @@ def Change_Talk(item):						##to select particular tab for private chat
 	current_index=item.__str__().__str__()
 
 def New_Talk(item):						##to get a new tab when user name is double clicked for private chat
-	username=item.text().__str__().__str__()
+	username=item.text().__str__().__str__().split("(")[0]
 	if username not in talk_list:	
 		tab = QtGui.QWidget()
         	tab.setObjectName("tab"+username)

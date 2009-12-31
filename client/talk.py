@@ -54,8 +54,7 @@ class Talk_Page(QtGui.QMainWindow):
 
     def closeEvent(self,e):
 	self.trns.write("lost")
-	#print "hhhhhhhhhhhhhhhhhhhhhhhhhhiiiiiiiiiiiiiiiiiiiiiii"	   
-
+	
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Talk Page", None, QtGui.QApplication.UnicodeUTF8))
