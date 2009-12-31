@@ -46,6 +46,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		user_base.removeUser(self.username)
 	print self.username
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
+	
 	string="populate_list"
 	for i in user_base.users_list:
 			string=string+">>:"+i[0]				##appending name to string to display all users.
