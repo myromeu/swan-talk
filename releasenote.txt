@@ -1,0 +1,32 @@
+﻿
+Release Note
+
+====================================
+	    SWAN-TALK
+====================================
+
+Version: 
+Swan-talk 1.0 (December,2009)
+
+License: 
+Copyright © 2009 CATFOSS.
+This file is free documentation; CATFOSS gives unlimited permission to copy, distribute and modify it under the GNU General Public License v3.
+
+Minimum System Requirements:
+System Processor		: 800MHz
+System Memory		:128MB
+Free Disk Space		:2MB
+Operating System		: Linux (kernel 2.6.26), Windows, Mac OS.
+Existing Softwares		:Python(2.5)
+
+Updates:
+This is the first version of Swan-talk.
+
+
+
+
+
+
+
+
+
