@@ -16,8 +16,7 @@ GUI.pushButton_3.setEnabled(False)
 class Echo(Protocol):						##to build protocol
 
    def dataReceived(self, data):				##called when data is received
-	global uname
-	uname=''
+	#global uname
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')			##remove "populate_list" to get user names
@@ -104,15 +103,16 @@ class Echo(Protocol):						##to build protocol
 			if k!= 'CommonRoom':
 				print s
 				#talk_list[k][0].append("logged out")
-				self.transport.write(s)
+				self.transport.write(s+">>:"+uname)
 	
-	elif packet[0]=="loggedout":
+	if packet[0]=="loggedout":
 		#global uname
 		print "vayya"
-		print "ss"+uname
+		uname1=packet.pop()
+		print "ss"+uname1
 		#global uname
 		#print uname
-		talk_list[packet[1]][0].append("logged out"+uname)
+		talk_list[packet[1]][0].append("logged out "+uname1)
 class EchoClientFactory(ClientFactory):
 
     def startedConnecting(self, connector):

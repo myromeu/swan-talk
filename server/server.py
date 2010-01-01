@@ -56,7 +56,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
     def dataReceived(self, data):						##called when data is received from client
 	global string
 	self.flag=1
-	
+	print "ddd",data
 	packet=data.split('>>:')						##splitting data at >>:
 	
 	if packet[0]=="user_details":
@@ -112,13 +112,14 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		packet.remove('CommonRoom')
 		print "atlast",packet
 		t=None
-		
+		p=packet.pop()
+		print "pppp",p
 		for i in user_base.users_list:
 			for k in packet:			
 				if i[0]==k:
 					t=i[1]
 					print "iiiii",i
-					t.write("loggedout>>:"+self.username)
+					t.write("loggedout>>:"+self.username+">>:"+p)
 					#break
 		#self.transport.loseConnection()			
 class EchoFactory(Factory):							##inherits Factory class
