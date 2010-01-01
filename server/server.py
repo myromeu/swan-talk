@@ -104,8 +104,23 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			except:
 				pass
 	elif packet[0]=="lost":
-		self.transport.loseConnection()
-
+		print "self.unnnnname",self.username
+		self.transport.write("lost>>:"+self.username)
+		#self.transport.loseConnection()
+	elif packet[0]=="logout":
+		packet.remove('logout')
+		packet.remove('CommonRoom')
+		print "atlast",packet
+		t=None
+		
+		for i in user_base.users_list:
+			for k in packet:			
+				if i[0]==k:
+					t=i[1]
+					print "iiiii",i
+					t.write("loggedout>>:"+self.username)
+					#break
+		#self.transport.loseConnection()			
 class EchoFactory(Factory):							##inherits Factory class
 	protocol = Echo								##define protocol as Echo
 	def __init__(self):

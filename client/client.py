@@ -12,11 +12,12 @@ GUI.show()
 reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
-
+#uname=''
 class Echo(Protocol):						##to build protocol
 
    def dataReceived(self, data):				##called when data is received
-	
+	global uname
+	uname=''
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')			##remove "populate_list" to get user names
@@ -91,8 +92,27 @@ class Echo(Protocol):						##to build protocol
 			
 		talk_list[packet[2]][0].append(packet[3]+": "+string)
 		
-  
+  	elif packet[0]=="lost":
+		#global uname		
+		uname=packet[1]
+		print "pooooooooooyi"+uname
+		#uname=self.uname
+		s="logout"
+		for k in talk_list:
+			print k
+			s=s+">>:"+k
+			if k!= 'CommonRoom':
+				print s
+				#talk_list[k][0].append("logged out")
+				self.transport.write(s)
 	
+	elif packet[0]=="loggedout":
+		#global uname
+		print "vayya"
+		print "ss"+uname
+		#global uname
+		#print uname
+		talk_list[packet[1]][0].append("logged out"+uname)
 class EchoClientFactory(ClientFactory):
 
     def startedConnecting(self, connector):
