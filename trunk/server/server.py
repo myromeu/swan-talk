@@ -57,9 +57,9 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		for i in user_base.users_list:
 			print"keri"+i[0]
 			i[1].write(string)
-		#print "kazhinju"
+		
 	except:
-		#print "oooooooooo"
+		
 		pass
 	
     def dataReceived(self, data):						##called when data is received from client
