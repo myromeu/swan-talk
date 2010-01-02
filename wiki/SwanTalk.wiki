@@ -7,7 +7,7 @@
 
        2. NetWork
 
-       3. [[#REDIRECT:Protocals used]]
+       3. [Protocals used]
           3.1 TCP
           
            3.2 IP
