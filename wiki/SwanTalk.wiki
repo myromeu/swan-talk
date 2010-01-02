@@ -67,13 +67,17 @@
        The server side would follow these steps: 
 
         1.Listen for incoming connections from clients 
+        
         2. Accept the client connection 
+        
         3.Send and receive information 
 
        In case of the client, these steps are followed: 
 
         1. Specify the address and service port of the server program 
+        
         2. Establish the connection with the server 
+        
         3.Send and receive information 
 
 
@@ -156,7 +160,9 @@
 
      1. The server crashes into a segmentation fault whenever one or more clients        
      close their talk page.
+    
      2. closing the talk page does not disconnect the user
+    
      3. once the talk page is closed the user cannot revive it for a new chat
 
 
