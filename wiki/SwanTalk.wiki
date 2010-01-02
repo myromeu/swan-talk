@@ -12,13 +12,13 @@
           
            3.2 IP
 
-      4.  #REDIRECT [[Client-Server Application]]
+       4.  [Client-Server Application]
       
-      5. Framework
+       5. Framework
 
           5.1 Twisted 8.2.0-3
 
-      6. Language used
+       6. Language used
 
           6.1 Python
 
