@@ -43,15 +43,15 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
 		user_base.removeUser(self.username)
-	print "removed"+self.username
+	
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	string="populate_list"
 	for i in user_base.users_list:
-			string=string+">>:"+i[0]+">>>>("+i[2]+")"		##appending user name and status message to string
-	print "users list",user_base.users_list
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username		##appending user name and status message to string
+	
 	try:
 		for i in user_base.users_list:
-			print"keri"+i[0]
+			
 			i[1].write(string)
 		
 	except:
@@ -75,7 +75,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			users_poplast.append(i)					##user name,transport,status message is appended to users_poplast		
 		for i in users_poplast:
 			if i[0]!=username:
-			    string=string+">>:"+i[0]+">>>>("+i[2]+")"		##refresh string 
+			    string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"		##refresh string 
 			else:
 			    self.flag=0
 			    self.transport.write("Already existing user")
@@ -84,7 +84,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    GUI.textBrowser_2.append(" disconnecting "+username)
 			    return
 		user_base.addUser(username,status_message,self.transport)	##goto addUser and append new user to user_list
-		string=string+">>:"+username+">>>>("+status_message+")"
+		string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"
 		
 			
 		if string!="populate_list":
