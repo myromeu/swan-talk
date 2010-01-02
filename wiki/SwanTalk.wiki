@@ -7,7 +7,7 @@
 
        2. NetWork
 
-       3. [[Protocals used]]
+       3. Protocals used
 
           3.1 TCP
 
