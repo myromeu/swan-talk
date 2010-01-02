@@ -7,7 +7,7 @@
 
        1. Introduction
 
-       2. [[media:LAN Netwokhttp://code.google.com/p/support/wiki/WikiSyntax#Localizing_Wiki_Content]
+       2. [[mediahttp://code.google.com/p/support/wiki/WikiSyntax#Localizing_Wiki_Content:LAN Netwok]
 
        3. Protocals used
 
@@ -164,8 +164,6 @@
 
 
     
-
-
 
 
 
