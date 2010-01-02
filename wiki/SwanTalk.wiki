@@ -12,8 +12,8 @@
           
            3.2 IP
 
-      4.  [[media:Client-Server Application]]
-
+      4.  [media:Client-Server Application]
+      
       5. Framework
 
           5.1 Twisted 8.2.0-3
