@@ -16,7 +16,7 @@ GUI.pushButton_3.setEnabled(False)
 class Echo(Protocol):						##to build protocol
 
    def dataReceived(self, data):				##called when data is received
-	
+	print "dataaa",data
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')			##remove "populate_list" to get user names

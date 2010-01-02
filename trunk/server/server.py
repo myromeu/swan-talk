@@ -21,6 +21,7 @@ class User:
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
 	def removeUser(self,name):						##called to remove user from users_list
+		print "removing!!!"
 		GUI.textBrowser_2.append(name+" : loged out ")	
 		temp=[]
 		for i in self.users_list:
@@ -44,12 +45,12 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
 		user_base.removeUser(self.username)
-	
+	print "removed"
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	
 	string="populate_list"
 	for i in user_base.users_list:
-			string=string+">>:"+i[0]				##appending name to string to display all users.
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"				##appending name to string to display all users.
 	for i in user_base.users_list:
 			i[1].write(string)
 	
@@ -104,6 +105,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			except:
 				pass
 	elif packet[0]=="lost":
+		self.flag=1
 		self.transport.loseConnection()
 
 class EchoFactory(Factory):							##inherits Factory class
