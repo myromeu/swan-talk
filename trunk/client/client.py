@@ -182,9 +182,9 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
-                x=talk_page.tabWidget.indexOf(tab)
-		talk_page.tabWidget.setCurrentIndex(x)
-		x=x+1
+                #x=talk_page.tabWidget.indexOf(tab)
+		#talk_page.tabWidget.setCurrentIndex(x)
+		#x=x+1
         	talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", username, None, 		QtGui.QApplication.UnicodeUTF8))
 		
 		QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
