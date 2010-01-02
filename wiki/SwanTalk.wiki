@@ -125,9 +125,15 @@
 
   = PyQt4 = 
 
-           In swan lan chat we use PyQt4 4.4.2-4  is a toolkit for creating GUI applications. It is a blending of python programming language and the successfull Qt library. Qt library is one of the most powerful libraries on this planet. If not the most powerful. 
+           In swan lan chat we use PyQt4 4.4.2-4  is a toolkit for creating GUI  
+     applications. It is a blending of python programming language and the successfull Qt 
+     library. Qt library is one of the most powerful libraries on this planet. If not the 
+     most powerful. 
 
-             Creating an application in PyQT4 may be done in a few ways. The most common one is to use QTDesigner, which we get with QT. QTDesigner let us draw the GUI which is very handy for complicated interfaces. We can place widgets on the window, add names etc. 
+             Creating an application in PyQT4 may be done in a few ways. The most common 
+     one is to use QTDesigner, which we get with QT. QTDesigner let us draw the GUI which 
+     is very handy for complicated interfaces. We can place widgets on the window, add 
+     names etc. 
 
    To create an application in PyQT4 we have to: 
 
@@ -148,9 +154,10 @@
 
   = ISSUES: =
 
-    1. The server crashes into a segmentation fault whenever one or more clients close    their talk page.
-    2. closing the talk page does not disconnect the user
-    3. once the talk page is closed the user cannot revive it for a new chat
+     1. The server crashes into a segmentation fault whenever one or more clients        
+        close their talk page.
+     2. closing the talk page does not disconnect the user
+     3. once the talk page is closed the user cannot revive it for a new chat
 
 
 
