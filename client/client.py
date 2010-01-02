@@ -12,11 +12,11 @@ GUI.show()
 reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
-#uname=''
+
 class Echo(Protocol):						##to build protocol
 
    def dataReceived(self, data):				##called when data is received
-	#global uname
+	print "dataaa",data
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')			##remove "populate_list" to get user names
@@ -91,28 +91,8 @@ class Echo(Protocol):						##to build protocol
 			
 		talk_list[packet[2]][0].append(packet[3]+": "+string)
 		
-  	elif packet[0]=="lost":
-		#global uname		
-		uname=packet[1]
-		print "pooooooooooyi"+uname
-		#uname=self.uname
-		s="logout"
-		for k in talk_list:
-			print k
-			s=s+">>:"+k
-			if k!= 'CommonRoom':
-				print s
-				#talk_list[k][0].append("logged out")
-				self.transport.write(s+">>:"+uname)
+  
 	
-	if packet[0]=="loggedout":
-		#global uname
-		print "vayya"
-		uname1=packet.pop()
-		print "ss"+uname1
-		#global uname
-		#print uname
-		talk_list[packet[1]][0].append("logged out "+uname1)
 class EchoClientFactory(ClientFactory):
 
     def startedConnecting(self, connector):
@@ -196,7 +176,7 @@ def New_Talk(item):						##to get a new tab when user name is double clicked for
         	lineEdit.setGeometry(QtCore.QRect(0, 400, 361, 41))
         	lineEdit.setObjectName("lineEdit"+username)
         	label = QtGui.QLabel(tab)
-        	label.setGeometry(QtCore.QRect(10, 380, 91, 16))
+        	label.setGeometry(QtCore.QRect(10, 380, 100, 16))
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))

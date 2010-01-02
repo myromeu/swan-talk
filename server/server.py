@@ -21,6 +21,7 @@ class User:
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
 	def removeUser(self,name):						##called to remove user from users_list
+		print "removing!!!"
 		GUI.textBrowser_2.append(name+" : loged out ")	
 		temp=[]
 		for i in self.users_list:
@@ -44,19 +45,27 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
 		user_base.removeUser(self.username)
-	
+	print "removed"+self.username
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
-	
+	print "to genrate populate list"
 	string="populate_list"
 	for i in user_base.users_list:
-			string=string+">>:"+i[0]				##appending name to string to display all users.
-	for i in user_base.users_list:
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"				##appending name to string to display all users.
+	print "populated list generated",string
+	print "users list",user_base.users_list
+	try:
+		for i in user_base.users_list:
+			print"keri"+i[0]
 			i[1].write(string)
+		print "kazhinju"
+	except:
+		print "oooooooooo"
+		pass
 	
     def dataReceived(self, data):						##called when data is received from client
 	global string
 	self.flag=1
-	print "ddd",data
+	
 	packet=data.split('>>:')						##splitting data at >>:
 	
 	if packet[0]=="user_details":
@@ -104,24 +113,9 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			except:
 				pass
 	elif packet[0]=="lost":
-		print "self.unnnnname",self.username
-		self.transport.write("lost>>:"+self.username)
-		#self.transport.loseConnection()
-	elif packet[0]=="logout":
-		packet.remove('logout')
-		packet.remove('CommonRoom')
-		print "atlast",packet
-		t=None
-		p=packet.pop()
-		print "pppp",p
-		for i in user_base.users_list:
-			for k in packet:			
-				if i[0]==k:
-					t=i[1]
-					print "iiiii",i
-					t.write("loggedout>>:"+self.username+">>:"+p)
-					#break
-		#self.transport.loseConnection()			
+		self.flag=1
+		self.transport.loseConnection()
+
 class EchoFactory(Factory):							##inherits Factory class
 	protocol = Echo								##define protocol as Echo
 	def __init__(self):
