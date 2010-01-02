@@ -21,7 +21,7 @@ class User:
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
 	def removeUser(self,name):						##called to remove user from users_list
-		print "removing!!!"
+		#print "removing!!!"
 		GUI.textBrowser_2.append(name+" : loged out ")	
 		temp=[]
 		for i in self.users_list:
@@ -45,14 +45,22 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
 		user_base.removeUser(self.username)
-	print "removed"
+	print "removed"+self.username
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
-	
+	#print "to genrate populate list"
 	string="populate_list"
 	for i in user_base.users_list:
 			string=string+">>:"+i[0]+">>>>("+i[2]+")"				##appending name to string to display all users.
-	for i in user_base.users_list:
+	#print "populated list generated",string
+	print "users list",user_base.users_list
+	try:
+		for i in user_base.users_list:
+			print"keri"+i[0]
 			i[1].write(string)
+		#print "kazhinju"
+	except:
+		#print "oooooooooo"
+		pass
 	
     def dataReceived(self, data):						##called when data is received from client
 	global string
