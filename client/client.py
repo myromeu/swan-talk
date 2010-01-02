@@ -81,7 +81,7 @@ class Echo(Protocol):						##to build protocol
         		lineEdit.setGeometry(QtCore.QRect(0, 400, 361, 41))
         		lineEdit.setObjectName("lineEdit"+packet[2])
         		label = QtGui.QLabel(tab)
-        		label.setGeometry(QtCore.QRect(10, 380, 91, 16))
+        		label.setGeometry(QtCore.QRect(10, 380, 100, 16))
         		label.setObjectName("label"+packet[2])
         		talk_page.tabWidget.addTab(tab, "")
 			label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
