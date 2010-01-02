@@ -7,10 +7,10 @@
 
        2. NetWork
 
-       3. Protocals used
+       3. [#REDIRECT:Protocals used]
           3.1 [TCP]
           
-          3.2 IP
+           3.2 IP
 
       4. Client-Server Application
 
