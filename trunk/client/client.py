@@ -166,11 +166,12 @@ def Change_Talk(item):							##to select particular tab for private chat
 	current_index=item.__str__().__str__()
 
 def New_Talk(item):							##to get a new tab when user name is double clicked for private chat
+	
 	username=item.text().__str__().__str__().split("(")[0]
 	if username not in talk_list:	
 		tab = QtGui.QWidget()
-        	tab.setObjectName("tab"+username)
-        	textBrowser = QtGui.QTextBrowser(tab)
+		tab.setObjectName("tab"+username)
+		textBrowser = QtGui.QTextBrowser(tab)
         	textBrowser.setGeometry(QtCore.QRect(0, 10, 361, 351))
        		textBrowser.setObjectName("textBrowser"+username)
         	lineEdit = QtGui.QLineEdit(tab)
@@ -181,7 +182,11 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
+                x=talk_page.tabWidget.indexOf(tab)
+		talk_page.tabWidget.setCurrentIndex(x)
+		x=x+1
         	talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", username, None, 		QtGui.QApplication.UnicodeUTF8))
+		
 		QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
 		talk_list[username]=(textBrowser,lineEdit)
 
