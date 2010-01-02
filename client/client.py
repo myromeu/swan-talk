@@ -26,12 +26,25 @@ class Echo(Protocol):						##to build protocol
 		for i in packet:
 			tr=i.split(">>>>")
 			username=tr[0]
-			
-	      		item = QtGui.QListWidgetItem(GUI.listWidget)
-        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username+tr[1], None, QtGui.QApplication.UnicodeUTF8))
+			trr=tr[1].split("><:")
+			print "trr[1]",trr[1]
+			item = QtGui.QListWidgetItem(GUI.listWidget)
+        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username+trr[0], None, QtGui.QApplication.UnicodeUTF8))
 			j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
-			
+		for i in packet:
+			if trr[1]!="no":
+				expireduname=trr[1]
+				s="logout"
+				print "talk-list",talk_list
+				for k in talk_list:
+					print "kkk",k
+					s=s+">>:"+k
+					if k==expireduname:
+						print "hello"
+						talk_list[k][0].append(k+" has logged out")
+						return	
+	
 	elif packet[0]=="chat":
 		convers=packet[1].split(":)")
 		if convers.__len__()>1:
