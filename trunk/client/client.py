@@ -6,7 +6,7 @@ import qt4reactor
 from swan import*
 import smileys_rc
 import smile_rc
-
+import sm_rc
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
 GUI.show()
@@ -148,6 +148,35 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
 		else :
 			pass
+		convers=string.split(">)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/16.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":o)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/29.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":-((")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/17.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":-))")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/18.png\" />"+convers[i]
+		else :
+			pass
+		
 		
 		if packet[2] not in talk_list:				##if user not in user_list
 			current_index=packet[2]				##current_index set to user name
