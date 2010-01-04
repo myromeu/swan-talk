@@ -5,7 +5,6 @@ from talk import *
 import qt4reactor
 from swan import*
 import create_rc
-import icons_rc
 import smileys_rc
 
 app=QtGui.QApplication(['swan'])
