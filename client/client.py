@@ -4,7 +4,6 @@ from PyQt4 import QtCore, QtGui
 from talk import *
 import qt4reactor
 from swan import*
-import create_rc
 import smileys_rc
 import smile_rc
 
