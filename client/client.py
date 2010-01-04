@@ -5,8 +5,6 @@ from talk import *
 import qt4reactor
 from swan import*
 import smileys_rc
-import smile_rc
-import sm_rc
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
 GUI.show()
@@ -55,52 +53,59 @@ class Echo(Protocol):							##to build protocol
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/smileys/Desktop/smileys_small/smile.png\" />"+convers[i]
+				string=string+"<img src=\":/newPrefix/sm1.jpg\" />"+convers[i]
 		else :
 			string=packet[1]
 		convers=string.split(":D")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/smileys/Desktop/smileys_small/laugh.png\" />"+convers[i]
+				string=string+"<img src=\":/newPrefix/sm2.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(":(")
+		convers=string.split(":-D")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/smileys/Desktop/smileys_small/sad.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(";)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/smileys/Desktop/smileys_small/wink.png\" />"+convers[i]
+				string=string+"<img src=\":/newPrefix/sm3.jpg\" />"+convers[i]
 		else :
 			pass
 		convers=string.split(":P")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/smileys/Desktop/smileys_small/goofy.png\" />"+convers[i]
+				string=string+"<img src=\":/newPrefix/sm6.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(">:-(")
+		convers=string.split(":(")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/sm8.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(">:)")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley10.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(":O")
+		convers=string.split(";D")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley11.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(":o")
+		convers=string.split(":O")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
@@ -114,39 +119,53 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/smiley13.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(";|")
+		convers=string.split(":-S")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley14.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(";-")
+		convers=string.split(":-|")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley15.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(";)")
+		convers=string.split("|-)")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley5.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(":~")
+		convers=string.split(">D")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley7.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(";D")
+		convers=string.split("B-)")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":03")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/108.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":bz")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/115.png\" />"+convers[i]
 		else :
 			pass
 		convers=string.split(">)")
@@ -156,6 +175,7 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/16.png\" />"+convers[i]
 		else :
 			pass
+		
 		convers=string.split(":o)")
 		if convers.__len__()>1:
 			string=convers[0]
@@ -163,21 +183,6 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/29.png\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(":-((")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/17.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-))")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/18.png\" />"+convers[i]
-		else :
-			pass
-		
 		
 		if packet[2] not in talk_list:				##if user not in user_list
 			current_index=packet[2]				##current_index set to user name
