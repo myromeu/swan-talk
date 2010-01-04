@@ -13,7 +13,7 @@ GUI.show()
 reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
-
+chat=0
 class Echo(Protocol):							##to build protocol
 
    def dataReceived(self, data):					##called when data is received
@@ -29,8 +29,8 @@ class Echo(Protocol):							##to build protocol
 			username=tr[0]
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
-        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
-                        GUI.listWidget.item(0).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
+        		GUI.listWidget.item(j).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
+                        GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
 			h = open(username+"av.jpg", "w")
 			h.write(tr[2])
 			h.close()
@@ -209,14 +209,14 @@ class EchoClientFactory(ClientFactory):
 	 GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Connection Failed, Retry', None, QtGui.QApplication.UnicodeUTF8))
 
 def Send_Details():							##called when chat button is clicked
-	global connection,talk_page,talk_list,current_index
+	global connection,talk_page,talk_list,current_index,chat
 	f = open("avatar.jpg", "rb")
 	contents = f.read()
 	f.close()
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
-		stat=GUI.textEdit.toPlainText().__str__().__str__()
+		stat=GUI.lineEdit_4.text().__str__().__str__()
 		if stat=="Set your status message here":
-			stat=""
+			stat="available"
 		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
@@ -230,6 +230,7 @@ def Send_Details():							##called when chat button is clicked
 		GUI.lineEdit.setEnabled(False)
 		GUI.pushButton_2.setEnabled(False)
 		GUI.pushButton_3.setEnabled(False)
+		chat=1
 	else:
 		GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Enter your username.', None, QtGui.QApplication.UnicodeUTF8))
 
@@ -282,9 +283,29 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 	connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index) ##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
 	talk_list[current_index][1].clear()
 
+
+def Send_Dynamic():
+	if chat==1:
+		print "heloooo"
+		global connection
+		f = open("avatar.jpg", "rb")
+		contents = f.read()
+		f.close()
+		stat=GUI.lineEdit_4.text().__str__().__str__()
+		if stat=="Set your status message here":
+			stat="available"
+		data="change_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
+		connection.transport.write(data)
+	else:
+		pass
+	
+
 current_index='CommonRoom'
 QtCore.QObject.connect(GUI.pushButton_3,QtCore.SIGNAL("clicked()"),Send_Details)
 QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),Connect)
 QtCore.QObject.connect(GUI.listWidget,QtCore.SIGNAL("itemDoubleClicked(QListWidgetItem*)"),New_Talk)
+
+QtCore.QObject.connect(GUI.lineEdit_4,QtCore.SIGNAL("returnPressed()"),Send_Dynamic)
+
 reactor.runReturn()							##reactor will run until Ctrl_C is pressed
 sys.exit(app.exec_())

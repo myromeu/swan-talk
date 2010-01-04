@@ -67,6 +67,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	if packet[0]=="user_details":
 		username=packet[1]
 		status_message=packet[2]
+		print "status",status_message
 		avatar_pic=packet[3]
 		GUI.textBrowser_2.append("User name :"+username)
 		self.username=username
@@ -108,6 +109,25 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			        GUI.textBrowser_2.append(self.username+">>>"+packet[1])
 			except:
 				pass
+	elif packet[0]=="change_details":
+		user_name=packet[1]
+		status_message=packet[2]
+		print "status",status_message
+		avatar_pic=packet[3]
+		pack=string.split(">>:")
+		for i in pack:
+			pack1=i.split(">>>>")
+			if pack1[0]== user_name:
+				pack.remove(i)
+		pack.append(user_name+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic)
+		string="populate_list"
+		for i in pack:
+			if i!="populate_list":
+				string=string+">>:"+i
+		print "pack is",string
+		for j in user_base.users_list:
+				j[1].write(string)
+		
 	elif packet[0]=="lost":
 		self.flag=1
 		self.transport.loseConnection()
