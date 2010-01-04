@@ -15,8 +15,8 @@ class User:
 	def __init__(self):
 		self.users_list=[]
 
-	def addUser(self,user_name,stat,tp):
-		self.users_list.append((user_name,tp,stat))			##username,transport and status message is appended to users_list
+	def addUser(self,user_name,stat,avtr,tp):
+		self.users_list.append((user_name,tp,stat,avtr))			##username,transport and status message is appended to users_list
 		GUI.textBrowser_2.append("new user logined in -> "+user_name)
 
 	def removeUser(self,name):						##called to remove user from users_list
@@ -47,7 +47,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	string="populate_list"
 	for i in user_base.users_list:
-			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username		##appending user name and status message to string
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username+">>>>"+i[3]		##appending user name and status message to string
 	
 	try:
 		for i in user_base.users_list:
@@ -67,6 +67,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	if packet[0]=="user_details":
 		username=packet[1]
 		status_message=packet[2]
+		avatar_pic=packet[3]
 		GUI.textBrowser_2.append("User name :"+username)
 		self.username=username
 		string="populate_list"
@@ -75,7 +76,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			users_poplast.append(i)					##user name,transport,status message is appended to users_poplast		
 		for i in users_poplast:
 			if i[0]!=username:
-			    string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"		##refresh string 
+			    string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"+">>>>"+i[3]		##refresh string 
 			else:
 			    self.flag=0
 			    self.transport.write("Already existing user")
@@ -83,8 +84,8 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    self.transport.loseConnection()			##connection rejected if user name already exists
 			    GUI.textBrowser_2.append(" disconnecting "+username)
 			    return
-		user_base.addUser(username,status_message,self.transport)	##goto addUser and append new user to user_list
-		string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"
+		user_base.addUser(username,status_message,avatar_pic,self.transport)	##goto addUser and append new user to user_list
+		string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic
 		
 			
 		if string!="populate_list":

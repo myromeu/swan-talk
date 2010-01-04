@@ -6,7 +6,7 @@ import qt4reactor
 from swan import*
 import smileys_rc
 import smile_rc
-import sm_rc
+
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
 GUI.show()
@@ -18,7 +18,6 @@ class Echo(Protocol):							##to build protocol
 
    def dataReceived(self, data):					##called when data is received
 	
-	print "dataaa",data
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')				##remove "populate_list" to get user names
@@ -31,9 +30,14 @@ class Echo(Protocol):							##to build protocol
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
-			GUI.listWidget.item(0).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
-			
-                        j=j+1
+                        GUI.listWidget.item(0).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
+			h = open(username+"av.jpg", "w")
+			h.write(tr[2])
+			h.close()
+			icon = QtGui.QIcon()
+        		icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+			GUI.listWidget.item(j).setIcon(icon)
+			j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
 		if trr[1]!="no":
@@ -149,35 +153,6 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(">)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/16.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":o)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/29.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-((")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/17.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-))")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/18.png\" />"+convers[i]
-		else :
-			pass
-		
 		
 		if packet[2] not in talk_list:				##if user not in user_list
 			current_index=packet[2]				##current_index set to user name
@@ -235,12 +210,14 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index
-
+	f = open("avatar.jpg", "rb")
+	contents = f.read()
+	f.close()
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
 		stat=GUI.textEdit.toPlainText().__str__().__str__()
 		if stat=="Set your status message here":
-			stat="Available"
-		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat 
+			stat=""
+		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()
