@@ -4,6 +4,8 @@ from PyQt4 import QtCore, QtGui
 from talk import *
 import qt4reactor
 from swan import*
+import create_rc
+import icons_rc
 import smileys_rc
 
 app=QtGui.QApplication(['swan'])
@@ -75,6 +77,34 @@ class Echo(Protocol):							##to build protocol
 			string=convers[0]
 			for i in range(1,convers.__len__()):
 				string=string+"<img src=\":/smileys/Desktop/smileys_small/wink.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split("::")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/ss1.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":$")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/ss2.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":>")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/ss3.png\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":O")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/ss6.png\" />"+convers[i]
 		else :
 			pass
 		convers=string.split(":P")
