@@ -19,7 +19,7 @@ class Swan(QtGui.QMainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(374, 501)
 	icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/main_window/swan_small.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("avatar.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("color: rgb(0, 85, 255);")
 	MainWindow.setMaximumSize(QtCore.QSize(377, 495))        
@@ -134,13 +134,14 @@ selection-background-color: rgb(0, 85, 255);""")
 
 
     def choose_avatar(self):
-	image_file=open(QtGui.QFileDialog.getOpenFileName(self,"*.png","ChooseAvatar").__str__().__str__(),'r')
-	avatar=open("avatar.png",'w')
+	image_file=open(QtGui.QFileDialog.getOpenFileName(self,"*.jpg","ChooseAvatar").__str__().__str__(),'r')
+	avatar=open("avatar.jpg",'w')
 	avatar.write(image_file.read())
 	avatar.close()
+	print "avatar is:",avatar
 	image_file.close()
 	icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("avatar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("avatar.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 	self.pushButton.setIcon(icon)
         self.pushButton.setIconSize(QtCore.QSize(110, 110))
 	
