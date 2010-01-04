@@ -113,7 +113,7 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/smiley13.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(";.")
+		convers=string.split(";|")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
@@ -141,7 +141,7 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/newPrefix/smiley7.jpg\" />"+convers[i]
 		else :
 			pass
-		convers=string.split(">)(")
+		convers=string.split(";D")
 		if convers.__len__()>1:
 			string=convers[0]
 			for i in range(1,convers.__len__()):
