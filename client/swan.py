@@ -162,12 +162,12 @@ selection-background-color: rgb(0, 85, 255);""")
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The project was inspired by and modeled along the PLC project by Bart Spaans</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.listWidget.setSortingEnabled(True)
-        __sortingEnabled = self.listWidget.isSortingEnabled()
+        
+        
         self.listWidget.setSortingEnabled(False)
         #self.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", "New Item", None, QtGui.QApplication.UnicodeUTF8))
         #self.listWidget.item(1).setText(QtGui.QApplication.translate("MainWindow", "New Item", None, QtGui.QApplication.UnicodeUTF8))
-        self.listWidget.setSortingEnabled(__sortingEnabled)
+        
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtGui.QApplication.translate("MainWindow", "Chat List", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setToolTip(QtGui.QApplication.translate("MainWindow", "Change your picture", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Name :", None, QtGui.QApplication.UnicodeUTF8))
