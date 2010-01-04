@@ -31,8 +31,9 @@ class Echo(Protocol):							##to build protocol
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
-                        GUI.listWidget.item(0).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
-			j=j+1
+			GUI.listWidget.item(0).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
+			
+                        j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
 		if trr[1]!="no":
@@ -238,7 +239,7 @@ def Send_Details():							##called when chat button is clicked
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
 		stat=GUI.textEdit.toPlainText().__str__().__str__()
 		if stat=="Set your status message here":
-			stat=""
+			stat="Available"
 		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat 
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
