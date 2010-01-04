@@ -121,6 +121,6 @@ def Start_Service():								##start server after port is specified
 	reactor.listenTCP(int(GUI.lineEdit.text().__str__().__str__()), EchoFactory())
 	GUI.lineEdit.setEnabled(False)
 	GUI.lineEdit_2.setEnabled(False)
-QtCore.QObject.connect(GUI.lineEdit,QtCore.SIGNAL("returnPressed()"),Start_Service)
+QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),Start_Service)
 reactor.runReturn()								##reactor will run until Ctrl_C is pressed
 sys.exit(app.exec_())
