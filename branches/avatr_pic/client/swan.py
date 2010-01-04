@@ -19,7 +19,7 @@ class Swan(QtGui.QMainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(374, 501)
 	icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("avatar.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("avatar1.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("color: rgb(0, 85, 255);")
 	MainWindow.setMaximumSize(QtCore.QSize(377, 495))        
