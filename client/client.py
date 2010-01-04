@@ -12,8 +12,151 @@ reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
 
-class Echo(Protocol):							##to build protocol
 
+def smilies(browser,packet):
+	convers=packet[1].split(":)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/sm1.jpg\" />"+convers[i]
+	else :
+		string=packet[1]
+	convers=string.split(":D")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/sm2.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":-D")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/sm3.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":P")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/sm6.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":(")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/sm8.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(";)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(">-)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley10.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(";D")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley11.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":O")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley12.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":|")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley13.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":-S")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley14.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":-|")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley15.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split("|-)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley5.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(">D")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley7.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split("B-)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":03")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/108.png\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(":bz")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/115.png\" />"+convers[i]
+	else :
+		pass
+	convers=string.split(">)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/16.png\" />"+convers[i]
+	else :
+		pass
+		
+	convers=string.split(":o)")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/newPrefix/29.png\" />"+convers[i]
+	else :
+		pass
+	
+	browser.append(packet[3]+": "+string)
+
+
+
+
+class Echo(Protocol):							##to build protocol
+  
+   
    def dataReceived(self, data):					##called when data is received
 	
 	print "dataaa",data
@@ -61,140 +204,8 @@ class Echo(Protocol):							##to build protocol
 				l=l+1
 			k=k+1		
 	elif packet[0]=="chat":
-		convers=packet[1].split(":)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/sm1.jpg\" />"+convers[i]
-		else :
-			string=packet[1]
-		convers=string.split(":D")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/sm2.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-D")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/sm3.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":P")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/sm6.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":(")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/sm8.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(";)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(">-)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley10.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(";D")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley11.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":O")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley12.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":|")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley13.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-S")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley14.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":-|")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley15.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split("|-)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley5.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(">D")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley7.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split("B-)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":03")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/108.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(":bz")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/115.png\" />"+convers[i]
-		else :
-			pass
-		convers=string.split(">)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/16.png\" />"+convers[i]
-		else :
-			pass
+		   
 		
-		convers=string.split(":o)")
-		if convers.__len__()>1:
-			string=convers[0]
-			for i in range(1,convers.__len__()):
-				string=string+"<img src=\":/newPrefix/29.png\" />"+convers[i]
-		else :
-			pass
 		
 		if packet[2] not in talk_list:				##if user not in user_list
 			current_index=packet[2]				##current_index set to user name
@@ -214,10 +225,10 @@ class Echo(Protocol):							##to build protocol
         		talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", packet[2], None, QtGui.QApplication.UnicodeUTF8))
 			QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
 			talk_list[packet[2]]=(textBrowser,lineEdit)
-			
-		talk_list[packet[2]][0].append(packet[3]+": "+string) 	##to display user name:data in CommonRoom textBrowser
+		global smilies	
+		smilies(talk_list[packet[2]][0],packet) 	##to display user name:data in CommonRoom textBrowser
 		
-  
+   
 	
 class EchoClientFactory(ClientFactory):
 
@@ -318,7 +329,9 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
 def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 	global connection,talk_list
 	if current_index != "CommonRoom":
-		talk_list[current_index][0].append(GUI.lineEdit.text().__str__().__str__()+": "+talk_list[current_index][1].text().__str__().__str__()) ##textBrowser(current_index[0]) is given username:content in  lineEdit(current_index[1])
+		smilies(talk_list[current_index][0],"",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__()))
+		#talk_list[current_index][0].append(GUI.lineEdit.text().__str__().__str__()+": "+self.smilies(talk_list[current_index][1].text().__str__().__str__())) ##textBrowser(current_index[0]) is given username:content in  lineEdit(current_index[1])
+		
 	connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index) ##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
 	talk_list[current_index][1].clear()
 
