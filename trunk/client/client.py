@@ -329,7 +329,7 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
 def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 	global connection,talk_list
 	if current_index != "CommonRoom":
-		smilies(talk_list[current_index][0],"",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__()))
+		smilies(talk_list[current_index][0],"",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__())
 		#talk_list[current_index][0].append(GUI.lineEdit.text().__str__().__str__()+": "+self.smilies(talk_list[current_index][1].text().__str__().__str__())) ##textBrowser(current_index[0]) is given username:content in  lineEdit(current_index[1])
 		
 	connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index) ##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
