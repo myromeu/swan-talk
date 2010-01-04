@@ -28,6 +28,10 @@ color: rgb(255, 85, 0);""")
         self.label.setGeometry(QtCore.QRect(10,290,57,17))
         self.label.setStyleSheet("color: rgb(0, 85, 255);")
         self.label.setObjectName("label")
+	self.label_3 = QtGui.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(10,330,200,17))
+        self.label_3.setStyleSheet("color: rgb(0, 85, 255);")
+        self.label_3.setObjectName("label")
         self.groupBox = QtGui.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(230,10,401,331))
         self.groupBox.setStyleSheet("color: rgb(0, 85, 255);")
@@ -63,6 +67,7 @@ color: rgb(255, 85, 0);""")
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SWAN Server", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Port :", None, QtGui.QApplication.UnicodeUTF8))
+	self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Press enter to start server", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "Information", None, QtGui.QApplication.UnicodeUTF8))
         self.textBrowser_2.setHtml(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
