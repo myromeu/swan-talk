@@ -6,6 +6,7 @@ import qt4reactor
 from swan import*
 import create_rc
 import smileys_rc
+import smile_rc
 
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
@@ -113,7 +114,76 @@ class Echo(Protocol):							##to build protocol
 				string=string+"<img src=\":/smileys/Desktop/smileys_small/goofy.png\" />"+convers[i]
 		else :
 			pass
-
+		convers=string.split(";)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(")(")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley10.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":O")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley11.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":.")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley12.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(":|")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley13.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";.")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley14.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";-")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley15.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";)")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley5.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(";~")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley7.jpg\" />"+convers[i]
+		else :
+			pass
+		convers=string.split(">)(")
+		if convers.__len__()>1:
+			string=convers[0]
+			for i in range(1,convers.__len__()):
+				string=string+"<img src=\":/newPrefix/smiley9.jpg\" />"+convers[i]
+		else :
+			pass
 		
 		if packet[2] not in talk_list:				##if user not in user_list
 			current_index=packet[2]				##current_index set to user name
