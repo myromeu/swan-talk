@@ -22,15 +22,17 @@ class Echo(Protocol):							##to build protocol
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
 		j=0
-		
+		smsg=[]
+		suser=[]
 		for i in packet:
 			tr=i.split(">>>>")
 			username=tr[0]
+			suser.append(username)
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
-        		GUI.listWidget.item(j).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
-			GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
-			
+        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
+			#GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
+			smsg.append(trr[0])
                         j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
@@ -47,7 +49,17 @@ class Echo(Protocol):							##to build protocol
 						
 					return
 				
+		#making status message as tooltip for sorted chatlist
+		k=0
+		
+		for m in smsg:	
+			l=0
+			for i in suser:
 				
+				if GUI.listWidget.item(k).text()==suser[l]:
+					GUI.listWidget.item(k).setToolTip(QtGui.QApplication.translate("MainWindow", smsg[l], None, QtGui.QApplication.UnicodeUTF8))
+				l=l+1
+			k=k+1		
 	elif packet[0]=="chat":
 		convers=packet[1].split(":)")
 		if convers.__len__()>1:
@@ -291,7 +303,7 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
         	lineEdit.setGeometry(QtCore.QRect(0, 400, 361, 41))
         	lineEdit.setObjectName("lineEdit"+username)
         	label = QtGui.QLabel(tab)
-        	label.setGeometry(QtCore.QRect(10, 380, 91, 16))
+        	label.setGeometry(QtCore.QRect(10, 380, 100, 16))
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
