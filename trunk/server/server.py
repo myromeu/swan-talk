@@ -47,7 +47,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	string="populate_list"
 	for i in user_base.users_list:
-			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username		##appending user name and status message to string
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username+">>>>"+i[3]              ##appending user name,status msg & avatar pic to string
 	
 	try:
 		for i in user_base.users_list:
