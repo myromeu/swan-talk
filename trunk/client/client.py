@@ -292,7 +292,7 @@ def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index,chat
 	f = Image.open("avatar.jpg")
 	size=f.resize((30,30))
-	size.save("avat.jpg")
+	size.save("avat.jpg","jpeg")
 	h=open("avat.jpg","rb")
 	contents=h.read()
 	h.close()
