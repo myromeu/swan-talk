@@ -13,6 +13,7 @@ The Project aims at being a beginner's guide to using python-twisted with PyQt4.
 Installation:
 
 Install Python 2.5 or above.
+Install Python-imaging
 Download the tarball swan-talk from website http://code.google.com/p/swan-talk/
 Untar the tarball using the command:
 tar xzvf swan-talk.tar.gz
