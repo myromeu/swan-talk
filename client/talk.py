@@ -29,7 +29,7 @@ class Talk_Page(QtGui.QMainWindow):
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 381, 481))
         self.tabWidget.setStyleSheet("color: rgb(0, 0, 255);")
         self.tabWidget.setObjectName("tabWidget")
-	self.tabWidget.setTabsClosable(True)
+	#self.tabWidget.setTabsClosable(True)
         self.tab = QtGui.QWidget()
         self.tab.setObjectName("tab")
         self.textBrowser = QtGui.QTextBrowser(self.tab)
