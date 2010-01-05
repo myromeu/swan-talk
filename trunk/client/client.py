@@ -5,6 +5,7 @@ from talk import *
 import qt4reactor
 from swan import*
 import smileys_rc
+import eastereggs_rc
 app=QtGui.QApplication(['swan'])
 GUI=Swan()
 GUI.show()
@@ -28,6 +29,14 @@ def smilies(browser,packet):
 			string=string+"<img src=\":/newPrefix/sm2.jpg\" />"+convers[i]
 	else :
 		pass
+	convers=string.split("sharingan")
+	if convers.__len__()>1:
+		string=convers[0]
+		for i in range(1,convers.__len__()):
+			string=string+"<img src=\":/eastereggs/Desktop/sharingan.jpeg\" />"+convers[i]
+	else :
+		pass
+	
 	convers=string.split(":-D")
 	if convers.__len__()>1:
 		string=convers[0]
