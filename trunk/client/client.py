@@ -11,7 +11,7 @@ GUI.show()
 reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
-
+chat=0
 
 def smilies(browser,packet):
 	convers=packet[1].split(":)")
@@ -159,23 +159,31 @@ class Echo(Protocol):							##to build protocol
    
    def dataReceived(self, data):					##called when data is received
 	
-	print "dataaa",data
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
 		j=0
-		smsg=[]
-		suser=[]
+		#smsg=[]
+		#suser=[]
+		#spic=[]
 		for i in packet:
 			tr=i.split(">>>>")
 			username=tr[0]
-			suser.append(username)
+			#pic=tr[2]
+			#suser.append(username)
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
-        		GUI.listWidget.item(0).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
-			
-			smsg.append(trr[0])
+        		GUI.listWidget.item(j).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
+			GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
+			#smsg.append(trr[0])
+			h = open(username+"av.jpg", "w")
+			h.write(tr[2])
+			h.close()
+			icon = QtGui.QIcon()
+        		icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+			GUI.listWidget.item(j).setIcon(icon)
+
                         j=j+1
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
@@ -193,16 +201,22 @@ class Echo(Protocol):							##to build protocol
 					return
 				
 		#making status message as tooltip for sorted chatlist
-		k=0
+		#k=0
 		
-		for m in smsg:	
+		'''for m in smsg:	
 			l=0
 			for i in suser:
 				
 				if GUI.listWidget.item(k).text()==suser[l]:
 					GUI.listWidget.item(k).setToolTip(QtGui.QApplication.translate("MainWindow", smsg[l], None, QtGui.QApplication.UnicodeUTF8))
+					#h = open(username+"av.jpg", "w")
+					#h.write(spic[l])
+					#h.close()
+					#icon = QtGui.QIcon()
+        				#icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+					#GUI.listWidget.item(k).setIcon(icon)
 				l=l+1
-			k=k+1		
+			k=k+1'''		
 	elif packet[0]=="chat":
 		   
 		
@@ -262,13 +276,15 @@ class EchoClientFactory(ClientFactory):
 	 GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Connection Failed, Retry', None, QtGui.QApplication.UnicodeUTF8))
 
 def Send_Details():							##called when chat button is clicked
-	global connection,talk_page,talk_list,current_index
-
+	global connection,talk_page,talk_list,current_index,chat
+	f = open("avatar.jpg", "rb")
+	contents = f.read()
+	f.close()
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
-		stat=GUI.textEdit.toPlainText().__str__().__str__()
+		stat=GUI.lineEdit_4.text().__str__().__str__()
 		if stat=="Set your status message here":
 			stat="Available"
-		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat 
+		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()
@@ -281,6 +297,7 @@ def Send_Details():							##called when chat button is clicked
 		GUI.lineEdit.setEnabled(False)
 		GUI.pushButton_2.setEnabled(False)
 		GUI.pushButton_3.setEnabled(False)
+		chat=1
 	else:
 		GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Enter your username.', None, QtGui.QApplication.UnicodeUTF8))
 
@@ -318,9 +335,6 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
-                #x=talk_page.tabWidget.indexOf(tab)
-		#talk_page.tabWidget.setCurrentIndex(x)
-		#x=x+1
         	talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", username, None, 		QtGui.QApplication.UnicodeUTF8))
 		
 		QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
@@ -329,14 +343,30 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
 def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 	global connection,talk_list
 	if current_index != "CommonRoom":
-		#smilies(talk_list[current_index][1].text().__str__().__str__(),GUI.lineEdit.text().__str__().__str__())
 		smilies(talk_list[current_index][0],("",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__()))
 	connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index) ##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
 	talk_list[current_index][1].clear()
 
+def Send_Dynamic():
+	global chat,connection
+	if chat== 1:
+		f = open("avatar.jpg", "rb")
+		contents = f.read()
+		f.close()
+		stat=GUI.lineEdit_4.text().__str__().__str__()
+		if stat=="Set your status message here":
+			stat="available"
+		data="change_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
+		connection.transport.write(data)
+	else:
+		pass
+
 current_index='CommonRoom'
+
 QtCore.QObject.connect(GUI.pushButton_3,QtCore.SIGNAL("clicked()"),Send_Details)
 QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),Connect)
 QtCore.QObject.connect(GUI.listWidget,QtCore.SIGNAL("itemDoubleClicked(QListWidgetItem*)"),New_Talk)
+QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),Send_Dynamic)
+QtCore.QObject.connect(GUI.lineEdit_4,QtCore.SIGNAL("returnPressed()"),Send_Dynamic)
 reactor.runReturn()							##reactor will run until Ctrl_C is pressed
 sys.exit(app.exec_())
