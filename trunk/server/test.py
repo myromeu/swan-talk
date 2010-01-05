@@ -58,7 +58,7 @@ color: rgb(255, 85, 0);""")
         self.label_2.setObjectName("label_2")
 	self.pushButton = QtGui.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(10, 340, 50, 27))
-	self.pushButton.setStyleSheet("color: rgb(255, 85, 0);")        
+	self.pushButton.setStyleSheet("color: rgb(0, 85, 255);")        
 	self.pushButton.setObjectName("pushButton")
 	MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -84,7 +84,7 @@ color: rgb(255, 85, 0);""")
 "</style></head><body style=\" font-family:\'DejaVu Sans\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\":/main_window/swan_small.png\" /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                  Server Running ....</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                  </p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.lineEdit_2.setText(QtGui.QApplication.translate("MainWindow", "14", None, QtGui.QApplication.UnicodeUTF8))
 	self.lineEdit.setText("2727")
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "No of Connections :", None, QtGui.QApplication.UnicodeUTF8))
