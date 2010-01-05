@@ -268,9 +268,6 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
         	label.setObjectName("label"+username)
         	talk_page.tabWidget.addTab(tab, "")
 		label.setText(QtGui.QApplication.translate("MainWindow", "Your Message :", None, QtGui.QApplication.UnicodeUTF8))
-                #x=talk_page.tabWidget.indexOf(tab)
-		#talk_page.tabWidget.setCurrentIndex(x)
-		#x=x+1
         	talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", username, None, 		QtGui.QApplication.UnicodeUTF8))
 		
 		QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
@@ -286,7 +283,6 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 
 def Send_Dynamic():
 	if chat==1:
-		print "heloooo"
 		global connection
 		f = open("avatar.jpg", "rb")
 		contents = f.read()
@@ -304,7 +300,7 @@ current_index='CommonRoom'
 QtCore.QObject.connect(GUI.pushButton_3,QtCore.SIGNAL("clicked()"),Send_Details)
 QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),Connect)
 QtCore.QObject.connect(GUI.listWidget,QtCore.SIGNAL("itemDoubleClicked(QListWidgetItem*)"),New_Talk)
-
+QtCore.QObject.connect(GUI.pushButton,QtCore.SIGNAL("clicked()"),Send_Dynamic)
 QtCore.QObject.connect(GUI.lineEdit_4,QtCore.SIGNAL("returnPressed()"),Send_Dynamic)
 
 reactor.runReturn()							##reactor will run until Ctrl_C is pressed
