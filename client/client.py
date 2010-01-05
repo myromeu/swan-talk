@@ -398,9 +398,12 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 def Send_Dynamic():
 	global chat,connection
 	if chat== 1:
-		f = open("avatar.jpg", "rb")
-		contents = f.read()
-		f.close()
+                f = Image.open("avatar.jpg")
+		size=f.resize((30,30))
+		size.save("avat.jpg")
+		h=open("avat.jpg","rb")
+		contents=h.read()
+		h.close()
 		stat=GUI.lineEdit_4.text().__str__().__str__()
 		if stat=="Set your status message here":
 			stat="available"
