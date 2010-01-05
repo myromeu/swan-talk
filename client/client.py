@@ -3,6 +3,7 @@ from sys import stdout
 from PyQt4 import QtCore, QtGui
 from talk import *
 import qt4reactor
+import Image
 from swan import*
 import smileys_rc
 import eastereggs_rc
@@ -179,7 +180,7 @@ class Echo(Protocol):							##to build protocol
 		for i in packet:
 			tr=i.split(">>>>")
 			username=tr[0]
-			#pic=tr[2]
+			pic=tr[2]
 			#suser.append(username)
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
@@ -187,7 +188,7 @@ class Echo(Protocol):							##to build protocol
 			GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
 			#smsg.append(trr[0])
 			h = open(username+"av.jpg", "w")
-			h.write(tr[2])
+			h.write(pic)
 			h.close()
 			icon = QtGui.QIcon()
         		icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -286,14 +287,18 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index,chat
-	f = open("avatar.jpg", "rb")
-	contents = f.read()
-	f.close()
+	f = Image.open("avatar.jpg")
+	size=f.resize((30,30))
+	size.save("avat.jpg")
+	h=open("avat.jpg","rb")
+	contents=h.read()
+	h.close()
+	
 	if (GUI.lineEdit.text().__str__().__str__()!=''):
 		stat=GUI.lineEdit_4.text().__str__().__str__()
 		if stat=="Set your status message here":
 			stat="Available"
-		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
+		data="user_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents
 		connection.transport.write(data)
 		talk_page=Talk_Page(connection.transport,GUI)
 		talk_page.show()

@@ -135,7 +135,7 @@ selection-background-color: rgb(0, 85, 255);""")
 
     def choose_avatar(self):
 	image_file=open(QtGui.QFileDialog.getOpenFileName(self,"*.jpg","ChooseAvatar").__str__().__str__(),'r')
-	avatar=open("avatar.jpg",'w')
+	avatar=open("avatar.jpg",'wb')
 	avatar.write(image_file.read())
 	avatar.close()
 	image_file.close()
