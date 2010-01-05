@@ -14,6 +14,7 @@ reactor=qt4reactor.install()
 talk_list={}  
 GUI.pushButton_3.setEnabled(False)
 chat=0
+suser=[]
 
 def smilies(browser,packet):
 	convers=packet[1].split(":)")
@@ -168,25 +169,26 @@ class Echo(Protocol):							##to build protocol
   
    
    def dataReceived(self, data):					##called when data is received
-	
+	global packet
 	packet=data.split(">>:")
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
+		global j		
 		j=0
 		#smsg=[]
-		#suser=[]
+		
 		#spic=[]
 		for i in packet:
 			tr=i.split(">>>>")
+			global suser			
 			username=tr[0]
 			pic=tr[2]
-			#suser.append(username)
+			suser.append(username)
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(j).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
 			GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
-			#smsg.append(trr[0])
 			h = open(username+"av.jpg", "w")
 			h.write(pic)
 			h.close()
@@ -195,6 +197,7 @@ class Echo(Protocol):							##to build protocol
 			GUI.listWidget.item(j).setIcon(icon)
 
                         j=j+1
+		
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
 		if trr[1]!="no":
@@ -211,8 +214,7 @@ class Echo(Protocol):							##to build protocol
 					return
 				
 		#making status message as tooltip for sorted chatlist
-		#k=0
-		
+				
 		'''for m in smsg:	
 			l=0
 			for i in suser:
@@ -249,8 +251,9 @@ class Echo(Protocol):							##to build protocol
         		talk_page.tabWidget.setTabText(talk_page.tabWidget.indexOf(tab), QtGui.QApplication.translate("MainWindow", packet[2], None, QtGui.QApplication.UnicodeUTF8))
 			QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
 			talk_list[packet[2]]=(textBrowser,lineEdit)
+			
 		global smilies	
-		smilies(talk_list[packet[2]][0],packet) 	##to display user name:data in CommonRoom textBrowser
+		smilies(talk_list[packet[2]][0],packet) 		##to display user name:data in CommonRoom textBrowser
 		
    
 	
@@ -354,11 +357,42 @@ def New_Talk(item):							##to get a new tab when user name is double clicked fo
 		QtCore.QObject.connect(lineEdit,QtCore.SIGNAL("returnPressed()"),Send_Chat)
 		talk_list[username]=(textBrowser,lineEdit)
 
+def help():
+	talk_list[current_index][0].append("/clear	-to clear the talk page")
+	talk_list[current_index][0].append("/status	-to change status message (/status:message)")
+	talk_list[current_index][0].append("/log	-to save the chat ")
+	talk_list[current_index][0].append("/users	-to display logged in users")
+	talk_list[current_index][1].clear()
+
+
 def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
-	global connection,talk_list
-	if current_index != "CommonRoom":
-		smilies(talk_list[current_index][0],("",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__()))
-	connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index) ##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
+	global connection,talk_list,packet
+	status=talk_list[current_index][1].text().__str__().__str__().split(":")
+	if talk_list[current_index][1].text().__str__().__str__()=="/clear":
+		talk_list[current_index][0].clear()
+			
+	elif talk_list[current_index][1].text().__str__().__str__()=="/help":
+		global help			
+		help()
+	elif talk_list[current_index][1].text().__str__().__str__()=="/users":
+		c=GUI.listWidget.count()
+		for index in xrange(c): 
+			talk_list[current_index][0].append(GUI.listWidget.item(index).text().__str__().__str__()) 
+		talk_list[current_index][1].clear()
+	
+	elif status[0]=="/status":
+					
+		GUI.lineEdit_4.setText(status[1])
+		Send_Dynamic()
+		talk_list[current_index][1].clear()
+	elif talk_list[current_index][1].text().__str__().__str__()=="/log":
+		save=open("save.txt",'w')
+		save.write(talk_list[packet[2]][0].toPlainText())
+		save.close()
+	else:
+		if current_index != "CommonRoom":
+			smilies(talk_list[current_index][0],("",talk_list[current_index][1].text().__str__().__str__(),"",GUI.lineEdit.text().__str__().__str__()))
+	        connection.transport.write("chat>>:"+talk_list[current_index][1].text().__str__().__str__()+">>:"+current_index)##for public chat "chat>>:contents of lineEdit>>:CommonRoom" is transported
 	talk_list[current_index][1].clear()
 
 def Send_Dynamic():
