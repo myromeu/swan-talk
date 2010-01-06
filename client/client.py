@@ -189,7 +189,7 @@ class Echo(Protocol):							##to build protocol
 				icon = QtGui.QIcon()
         			icon.addPixmap(QtGui.QPixmap(".temp/"+packet[1]+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 				GUI.listWidget.item(i).setIcon(icon)
-	if packet[0]=="new_user":
+	elif packet[0]=="new_user":
 		j1=GUI.listWidget.count()
 		item = QtGui.QListWidgetItem(GUI.listWidget)
         	GUI.listWidget.item(j1).setText(QtGui.QApplication.translate("MainWindow", packet[1], None, QtGui.QApplication.UnicodeUTF8))
@@ -201,7 +201,7 @@ class Echo(Protocol):							##to build protocol
         	icon.addPixmap(QtGui.QPixmap(".temp/"+packet[1]+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 		GUI.listWidget.item(j1).setIcon(icon)
 		
-	if packet[0]=="remove_my_list":
+	elif packet[0]=="remove_my_list":
 		for i in xrange(GUI.listWidget.count()):
 			token=""
 			try:
@@ -219,7 +219,7 @@ class Echo(Protocol):							##to build protocol
 				talk_list[k][0].append(k+" has logged out")
 					
 		
-	if packet[0]=="populate_list":
+	elif packet[0]=="populate_list":
 
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
@@ -295,7 +295,8 @@ class Echo(Protocol):							##to build protocol
 		global smilies	
 		smilies(talk_list[packet[2]][0],packet) 		##to display user name:data in CommonRoom textBrowser
 		
-   
+        else:
+		pass
 	
 class EchoClientFactory(ClientFactory):
 
