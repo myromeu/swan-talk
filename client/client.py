@@ -177,13 +177,15 @@ class Echo(Protocol):							##to build protocol
 		global j		
 		j=0
 		#smsg=[]
-		
+		global suser
+		suser=[]
 		#spic=[]
+		print "packet length",packet.__len__()
 		for i in packet:
 			tr=i.split(">>>>")
-			global suser			
 			username=tr[0]
 			pic=tr[2]
+			print tr[0],tr[1]
 			suser.append(username)
 			trr=tr[1].split("><:")
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
@@ -290,10 +292,10 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index,chat
-	f = Image.open(".temp/avatar.png")
-	size=f.resize((30,30))
-	size.save(".temp/avat.png","png")
-	h=open(".temp/avat.png","rb")
+	#f = Image.open(".temp/avatar.png")
+	#size=f.resize((30,30))
+	#size.save(".temp/avat.png","png")
+	h=open(".temp/avatar.png","rb")
 	contents=h.read()
 	h.close()
 	
@@ -401,7 +403,7 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 def Send_Dynamic():
 	global chat,connection
 	if chat== 1:
-                f = Image.open(".temp/avatar.png")
+                #f = Image.open(".temp/avatar.png")
 		#size=f.resize((30,30))
 		#size.save(".temp/avat.png")
 		h=open(".temp/avatar.png","rb")
@@ -410,7 +412,7 @@ def Send_Dynamic():
 		stat=GUI.lineEdit_4.text().__str__().__str__()
 		if stat=="Set your status message here":
 			stat="available"
-		data="change_details>>:"+GUI.lineEdit.text().__str__().__str__()+">>:"+stat+">>:"+contents 
+		data="change_details>>:"+stat+">>:"+contents 
 		connection.transport.write(data)
 	else:
 		pass
