@@ -4,7 +4,7 @@ from PyQt4 import QtCore, QtGui
 import qt4reactor
 from test import*
 import sys
-
+import time
 app=QtGui.QApplication(['test'])
 GUI=Swan_Server()
 GUI.show()
@@ -14,6 +14,7 @@ class User:
 
 	def __init__(self):
 		self.users_list=[]
+		self.log=open("log.txt",'a')
 
 	def addUser(self,user_name,stat,avtr,tp):
 		self.users_list.append((user_name,tp,stat,avtr))			##username,transport and status message is appended to users_list
@@ -26,6 +27,11 @@ class User:
 			if i[0]!=name:
 				temp.append(i)
 		self.users_list=temp						##refreshed users_list
+	def names(self):
+		lis=[]
+		for i in self.users_list:
+			lis.append(i[0])
+		return lis
 user_base=User()
 
 class Echo(Protocol):								##Protocols for new connection,connection lost,data received are defined here.This 											  class inherits Protocol class
@@ -44,21 +50,23 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	if self.flag!=0:
 		try:
 			user_base.removeUser(self.username)
+			string="remove_my_list"
+			string=string+">>:"+self.username              ##appending user name,status msg & avatar pic to string
+			#print "ividem ethi"
+			try:
+				for i in user_base.users_list:
+					try:
+						i[1].write(string)
+					except:
+						pass
+			except:
+		
+				pass
+			
 		except:		
 			print "error region"
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
-	string="remove_my_list"
-	string=string+">>:"+self.username              ##appending user name,status msg & avatar pic to string
-	#print "ividem ethi"
-	try:
-		for i in user_base.users_list:
-			try:
-				i[1].write(string)
-			except:
-				pass
-	except:
-		
-		pass
+	
 	
     def dataReceived(self, data):						##called when data is received from client
 	global string
@@ -67,34 +75,29 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	
 	if packet[0]=="user_details":
 		username=packet[1]
+		self.username=username
 		status_message=packet[2]
 		avatar_pic=packet[3]
 		GUI.textBrowser_2.append("User name :"+username)
-		self.username=username
-		string="populate_list"
-		users_poplast=[]
-		for i in user_base.users_list:
-			users_poplast.append(i)					##user name,transport,status message is appended to users_poplast		
-		for i in users_poplast:
-			if i[0]!=username:
-			    string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"+">>>>"+i[3]		##refresh string 
-			else:
-			    self.flag=0
-			    self.transport.write("Already existing user")
-			    GUI.textBrowser_2.append(username+" is an  existing user !!! ")
-			    self.transport.loseConnection()			##connection rejected if user name already exists
-			    GUI.textBrowser_2.append(" disconnecting "+username)
-			    return
-		
-		#string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic
+		if username in user_base.names():
+			 self.flag=0
+			 self.transport.write("Already existing user")
+			 GUI.textBrowser_2.append(username+" is an  existing user !!! ")
+			 #self.transport.loseConnection()
+			 #GUI.textBrowser_2.append(" disconnecting "+username)
+		else:
+			string="populate_list"
+			for i in user_base.users_list:
+				string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"+">>>>"+i[3]
+			if string!="populate_list":
+				self.transport.write(string)	
+				for j in user_base.users_list:
+					print j[0],string.__len__()
+					j[1].write("new_user>>:"+username+">>:("+status_message+")"+">>:"+avatar_pic)			##send string to all users
+			if username!="un_named":		
+				user_base.addUser(username,status_message,avatar_pic,self.transport)	##goto addUser and append new user to user_list
 		
 			
-		if string!="populate_list":
-			self.transport.write(string)	
-			for j in user_base.users_list:
-				print j[0],string.__len__()
-				j[1].write("new_user>>:"+username+">>:("+status_message+")"+">>:"+avatar_pic)			##send string to all users
-		user_base.addUser(username,status_message,avatar_pic,self.transport)	##goto addUser and append new user to user_list
 
 	elif packet[0]=="chat":							##packet[0] is chat when chatting
 		if packet[2]=="CommonRoom":					##packet[2] indicate "CommonRoom" i.e. public or else name of recepient
@@ -116,12 +119,8 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	elif packet[0]=="change_details":
 		status_message=packet[1]
 		avatar_pic=packet[2]
-		for i in user_base.users_list:
-			if i[0]==self.username:
-				tp=i[1]
-				break
 		user_base.removeUser(self.username)
-		user_base.addUser(self.username,status_message,avatar_pic,tp)				
+		user_base.addUser(self.username,status_message,avatar_pic,self.transport)				
 		for i in user_base.users_list:
 			if i[0]!=self.username:	
 				i[1].write("change_list>>:"+self.username+">>:("+status_message+")>>:"+avatar_pic)
