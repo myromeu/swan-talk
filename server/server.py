@@ -38,7 +38,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	    GUI.textBrowser_2.append("Too many connections, try later")
             self.transport.loseConnection()					##go to connectionLost() to lose connection
 	self.flag=1
-	
+	self.username="un_named"
     def connectionLost(self, reason):						##executed when loseConnection() is called
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
@@ -61,7 +61,6 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
     def dataReceived(self, data):						##called when data is received from client
 	global string
 	self.flag=1
-	
 	packet=data.split('>>:')						##splitting data at >>:
 	
 	if packet[0]=="user_details":
@@ -91,6 +90,7 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		if string!="populate_list":
 			
 			for j in user_base.users_list:
+				print j[0],string.__len__()
 				j[1].write(string)				##send string to all users
 	elif packet[0]=="chat":							##packet[0] is chat when chatting
 		if packet[2]=="CommonRoom":					##packet[2] indicate "CommonRoom" i.e. public or else name of recepient
@@ -110,21 +110,21 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 				pass
 
 	elif packet[0]=="change_details":
-		user_name=packet[1]
-		status_message=packet[2]
-		avatar_pic=packet[3]
-		pack=string.split(">>:")
-		for i in pack:
-			pack1=i.split(">>>>")
-			if pack1[0]== user_name:
-				pack.remove(i)
-		pack.append(user_name+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic)
+		status_message=packet[1]
+		avatar_pic=packet[2]
 		string="populate_list"
-		for i in pack:
-			if i!="populate_list":
-				string=string+">>:"+i
-		for j in user_base.users_list:
-				j[1].write(string)
+		for i in user_base.users_list:
+			if i[0]==self.username:
+				tp=i[1]
+				break
+		user_base.removeUser(self.username)
+		user_base.addUser(self.username,status_message,avatar_pic,tp)				
+		for i in user_base.users_list:	
+			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"+">>>>"+i[3]
+				
+		if string!="populate_list":
+				for j in user_base.users_list:
+					j[1].write(string)
 	elif packet[0]=="lost":
 		self.flag=1
 		self.transport.loseConnection()
