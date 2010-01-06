@@ -171,6 +171,8 @@ class Echo(Protocol):							##to build protocol
    def dataReceived(self, data):					##called when data is received
 	global packet,talk_list
 	packet=data.split(">>:")
+	
+	
 
 	if packet[0]=="change_list":
 		for i in xrange(GUI.listWidget.count()):
@@ -218,6 +220,7 @@ class Echo(Protocol):							##to build protocol
 					
 		
 	if packet[0]=="populate_list":
+
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
 		global j		
@@ -310,7 +313,7 @@ class EchoClientFactory(ClientFactory):
 	GUI.pushButton_3.setEnabled(False)
 	GUI.pushButton_2.setEnabled(True)
 	try:
-		talk_page.hide()
+		talk_page.destroy()
 	except:
 		pass     
 	GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Lost connection.', None, QtGui.QApplication.UnicodeUTF8))
@@ -320,7 +323,7 @@ class EchoClientFactory(ClientFactory):
 	 GUI.pushButton_3.setEnabled(False)
 	 GUI.pushButton_2.setEnabled(True)
 	 try:
-		talk_page.hide()
+		talk_page.destroy()
 	 except:
 		pass      
 	 GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", 'Connection Failed, Retry', None, QtGui.QApplication.UnicodeUTF8))
