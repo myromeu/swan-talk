@@ -189,11 +189,11 @@ class Echo(Protocol):							##to build protocol
 	      		item = QtGui.QListWidgetItem(GUI.listWidget)
         		GUI.listWidget.item(j).setText(QtGui.QApplication.translate("MainWindow", username, None, QtGui.QApplication.UnicodeUTF8))
 			GUI.listWidget.item(j).setToolTip(QtGui.QApplication.translate("MainWindow", trr[0], None, QtGui.QApplication.UnicodeUTF8))
-			h = open(username+"av.jpg", "w")
+			h = open(username+"av.png", "w")
 			h.write(pic)
 			h.close()
 			icon = QtGui.QIcon()
-        		icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        		icon.addPixmap(QtGui.QPixmap(username+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 			GUI.listWidget.item(j).setIcon(icon)
 
                         j=j+1
@@ -221,11 +221,11 @@ class Echo(Protocol):							##to build protocol
 				
 				if GUI.listWidget.item(k).text()==suser[l]:
 					GUI.listWidget.item(k).setToolTip(QtGui.QApplication.translate("MainWindow", smsg[l], None, QtGui.QApplication.UnicodeUTF8))
-					#h = open(username+"av.jpg", "w")
+					#h = open(username+"av.png", "w")
 					#h.write(spic[l])
 					#h.close()
 					#icon = QtGui.QIcon()
-        				#icon.addPixmap(QtGui.QPixmap(username+"av.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        				#icon.addPixmap(QtGui.QPixmap(username+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 					#GUI.listWidget.item(k).setIcon(icon)
 				l=l+1
 			k=k+1'''		
@@ -290,10 +290,10 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index,chat
-	f = Image.open("avatar.jpg")
+	f = Image.open("avatar.png")
 	size=f.resize((30,30))
-	size.save("avat.jpg","jpeg")
-	h=open("avat.jpg","rb")
+	size.save("avat.png","png")
+	h=open("avat.png","rb")
 	contents=h.read()
 	h.close()
 	
@@ -398,10 +398,10 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 def Send_Dynamic():
 	global chat,connection
 	if chat== 1:
-                f = Image.open("avatar.jpg")
+                f = Image.open("avatar.png")
 		size=f.resize((30,30))
-		size.save("avat.jpg")
-		h=open("avat.jpg","rb")
+		size.save("avat.png")
+		h=open("avat.png","rb")
 		contents=h.read()
 		h.close()
 		stat=GUI.lineEdit_4.text().__str__().__str__()
