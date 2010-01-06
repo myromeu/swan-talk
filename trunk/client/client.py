@@ -169,8 +169,44 @@ class Echo(Protocol):							##to build protocol
   
    
    def dataReceived(self, data):					##called when data is received
-	global packet
+	global packet,talk_list
 	packet=data.split(">>:")
+
+	if packet[0]=="change_list":
+		for i in xrange(GUI.listWidget.count()):
+			if GUI.listWidget.item(i).text()==packet[1]:
+				GUI.listWidget.item(i).setToolTip(QtGui.QApplication.translate("MainWindow", packet[2], None,QtGui.QApplication.UnicodeUTF8))
+				h = open(".temp/"+packet[1]+"av.png", "wb")
+				h.write(packet[3])
+				h.close()
+				icon = QtGui.QIcon()
+        			icon.addPixmap(QtGui.QPixmap(".temp/"+packet[1]+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+				GUI.listWidget.item(i).setIcon(icon)
+	if packet[0]=="new_user":
+		j1=GUI.listWidget.count()
+		item = QtGui.QListWidgetItem(GUI.listWidget)
+        	GUI.listWidget.item(j1).setText(QtGui.QApplication.translate("MainWindow", packet[1], None, QtGui.QApplication.UnicodeUTF8))
+		GUI.listWidget.item(j1).setToolTip(QtGui.QApplication.translate("MainWindow", packet[2], None, QtGui.QApplication.UnicodeUTF8))
+		h = open(".temp/"+packet[1]+"av.png", "wb")
+		h.write(packet[3])
+		h.close()
+		icon = QtGui.QIcon()
+        	icon.addPixmap(QtGui.QPixmap(".temp/"+packet[1]+"av.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+		GUI.listWidget.item(j1).setIcon(icon)
+		
+	if packet[0]=="remove_my_list":
+		for i in xrange(GUI.listWidget.count()):
+			if GUI.listWidget.item(i).text()==packet[1]:
+				GUI.listWidget.takeItem(i)
+		expireduname=packet[1]
+		talk_list['CommonRoom'][0].append(expireduname+" has logged out")
+		#displaying logout message in corresponding tab
+		for k in talk_list:
+			if k==expireduname:
+				print k,"logout"
+				talk_list[k][0].append(k+" has logged out")
+					
+		
 	if packet[0]=="populate_list":
 		packet.remove('populate_list')				##remove "populate_list" to get user names
 		GUI.listWidget.clear()
@@ -202,18 +238,7 @@ class Echo(Protocol):							##to build protocol
 		
 		GUI.tabWidget.setCurrentIndex(0)
 		#displaying logout message in commonroom
-		if trr[1]!="no":
-			expireduname=trr[1]
-			talk_list['CommonRoom'][0].append(expireduname+" has logged out")
-		#displaying logout message in corresponding tab
-		if trr[1]!="no":
-			expireduname=trr[1]
-			for k in talk_list:
-				if k==expireduname:
 		
-					talk_list[k][0].append(k+" has logged out")
-						
-					return
 				
 		#making status message as tooltip for sorted chatlist
 				
