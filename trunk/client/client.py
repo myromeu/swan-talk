@@ -317,10 +317,10 @@ class EchoClientFactory(ClientFactory):
 
 def Send_Details():							##called when chat button is clicked
 	global connection,talk_page,talk_list,current_index,chat
-	#f = Image.open(".temp/avatar.png")
-	#size=f.resize((30,30))
-	#size.save(".temp/avat.png","png")
-	h=open(".temp/avatar.png","rb")
+	f = Image.open(".temp/avatar.png")
+	size=f.resize((30,30))
+	size.save(".temp/avat.png","png")
+	h=open(".temp/avat.png","rb")
 	contents=h.read()
 	h.close()
 	
@@ -428,10 +428,10 @@ def Send_Chat():							##called when returnpressed in lineEdit of talk_Page
 def Send_Dynamic():
 	global chat,connection
 	if chat== 1:
-                #f = Image.open(".temp/avatar.png")
-		#size=f.resize((30,30))
-		#size.save(".temp/avat.png")
-		h=open(".temp/avatar.png","rb")
+                f = Image.open(".temp/avatar.png")
+		size=f.resize((30,30))
+		size.save(".temp/avat.png","png")
+		h=open(".temp/avat.png","rb")
 		contents=h.read()
 		h.close()
 		stat=GUI.lineEdit_4.text().__str__().__str__()
