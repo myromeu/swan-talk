@@ -45,16 +45,17 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 		try:
 			user_base.removeUser(self.username)
 		except:		
-			pass
+			print "error region"
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
 	string="remove_my_list"
 	string=string+">>:"+self.username              ##appending user name,status msg & avatar pic to string
-	print "ividem ethi"
+	#print "ividem ethi"
 	try:
 		for i in user_base.users_list:
-			
-			i[1].write(string)
-		
+			try:
+				i[1].write(string)
+			except:
+				pass
 	except:
 		
 		pass
