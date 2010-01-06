@@ -297,7 +297,8 @@ class Echo(Protocol):							##to build protocol
 		
         elif packet[0]=="Already existing user":
 		global talk_page
-		#GUI.pushButton_3.setEnabled(False)
+		GUI.pushButton_3.setEnabled(True)
+		GUI.lineEdit.setEnabled(True)
 		#GUI.pushButton_2.setEnabled(True)
 		try:
 			talk_page.destroy()
