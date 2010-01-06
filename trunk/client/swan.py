@@ -146,7 +146,7 @@ selection-background-color: rgb(0, 85, 255);""")
 	
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SWAN Chat", None, QtGui.QApplication.UnicodeUTF8))
-	MainWindow.setStatusTip(QtGui.QApplication.translate("MainWindow", "Connecting", None, QtGui.QApplication.UnicodeUTF8))
+	#MainWindow.setStatusTip(QtGui.QApplication.translate("MainWindow", "Connecting", None, QtGui.QApplication.UnicodeUTF8))
         self.textBrowser.setHtml(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

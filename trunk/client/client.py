@@ -320,11 +320,13 @@ def Send_Details():							##called when chat button is clicked
 
 def Connect():								##called when connect button is clicked
 	global connection
+	
 	connection=reactor.connectTCP(GUI.lineEdit_2.text().__str__().__str__(),int(GUI.lineEdit_3.text().__str__().__str__()) , EchoClientFactory()) ##listenTCP and connectTCP,to set defaults for all connections coming from that accept() or connect()
 	GUI.lineEdit_3.setEnabled(False)
 	GUI.lineEdit_2.setEnabled(False)
 	GUI.lineEdit.setEnabled(True)					##to connect again from the same window if the user is already logged in
 	GUI.tabWidget.setCurrentIndex(1)
+	GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", "Connected", None, QtGui.QApplication.UnicodeUTF8))
 def Close(index):
 	global talk_page,talk_list
 	text=talk_page.tabWidget.tabText (index)
