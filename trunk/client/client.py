@@ -174,7 +174,12 @@ class Echo(Protocol):							##to build protocol
 
 	if packet[0]=="change_list":
 		for i in xrange(GUI.listWidget.count()):
-			if GUI.listWidget.item(i).text()==packet[1]:
+			token=""
+			try:
+				token=GUI.listWidget.item(i).text().__str__().__str__()
+			except:
+				pass
+			if token==packet[1]:
 				GUI.listWidget.item(i).setToolTip(QtGui.QApplication.translate("MainWindow", packet[2], None,QtGui.QApplication.UnicodeUTF8))
 				h = open(".temp/"+packet[1]+"av.png", "wb")
 				h.write(packet[3])
@@ -196,7 +201,12 @@ class Echo(Protocol):							##to build protocol
 		
 	if packet[0]=="remove_my_list":
 		for i in xrange(GUI.listWidget.count()):
-			if GUI.listWidget.item(i).text()==packet[1]:
+			token=""
+			try:
+				token=GUI.listWidget.item(i).text().__str__().__str__()
+			except:
+				pass
+			if token==packet[1]:
 				GUI.listWidget.takeItem(i)
 		expireduname=packet[1]
 		talk_list['CommonRoom'][0].append(expireduname+" has logged out")
@@ -347,7 +357,7 @@ def Send_Details():							##called when chat button is clicked
 
 def Connect():								##called when connect button is clicked
 	global connection
-	
+	GUI.listWidget.clear()
 	connection=reactor.connectTCP(GUI.lineEdit_2.text().__str__().__str__(),int(GUI.lineEdit_3.text().__str__().__str__()) , EchoClientFactory()) ##listenTCP and connectTCP,to set defaults for all connections coming from that accept() or connect()
 	GUI.lineEdit_3.setEnabled(False)
 	GUI.lineEdit_2.setEnabled(False)
