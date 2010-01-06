@@ -295,8 +295,10 @@ class Echo(Protocol):							##to build protocol
 		global smilies	
 		smilies(talk_list[packet[2]][0],packet) 		##to display user name:data in CommonRoom textBrowser
 		
-        else:
-		pass
+        elif packet[0]=="Already existing user":
+		GUI.setStatusTip(QtGui.QApplication.translate("MainWindow", "Change your username.", None, QtGui.QApplication.UnicodeUTF8))
+	else:
+		pass	
 	
 class EchoClientFactory(ClientFactory):
 
