@@ -42,13 +42,14 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
     def connectionLost(self, reason):						##executed when loseConnection() is called
         self.factory.numProtocols = self.factory.numProtocols-1
 	if self.flag!=0:
-		user_base.removeUser(self.username)
-	
+		try:
+			user_base.removeUser(self.username)
+		except:		
+			pass
 	GUI.textBrowser_2.append("Connection Lost \n\t user name : "+self.username)
-	string="populate_list"
-	for i in user_base.users_list:
-			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+self.username+">>>>"+i[3]              ##appending user name,status msg & avatar pic to string
-	
+	string="remove_my_list"
+	string=string+">>:"+self.username              ##appending user name,status msg & avatar pic to string
+	print "ividem ethi"
 	try:
 		for i in user_base.users_list:
 			
@@ -83,15 +84,17 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 			    self.transport.loseConnection()			##connection rejected if user name already exists
 			    GUI.textBrowser_2.append(" disconnecting "+username)
 			    return
-		user_base.addUser(username,status_message,avatar_pic,self.transport)	##goto addUser and append new user to user_list
-		string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic
+		
+		#string=string+">>:"+username+">>>>("+status_message+")"+"><:"+"no"+">>>>"+avatar_pic
 		
 			
 		if string!="populate_list":
-			
+			self.transport.write(string)	
 			for j in user_base.users_list:
 				print j[0],string.__len__()
-				j[1].write(string)				##send string to all users
+				j[1].write("new_user>>:"+username+">>:("+status_message+")"+">>:"+avatar_pic)			##send string to all users
+		user_base.addUser(username,status_message,avatar_pic,self.transport)	##goto addUser and append new user to user_list
+
 	elif packet[0]=="chat":							##packet[0] is chat when chatting
 		if packet[2]=="CommonRoom":					##packet[2] indicate "CommonRoom" i.e. public or else name of recepient
 			for i in user_base.users_list:
@@ -112,19 +115,17 @@ class Echo(Protocol):								##Protocols for new connection,connection lost,data
 	elif packet[0]=="change_details":
 		status_message=packet[1]
 		avatar_pic=packet[2]
-		string="populate_list"
 		for i in user_base.users_list:
 			if i[0]==self.username:
 				tp=i[1]
 				break
 		user_base.removeUser(self.username)
 		user_base.addUser(self.username,status_message,avatar_pic,tp)				
-		for i in user_base.users_list:	
-			string=string+">>:"+i[0]+">>>>("+i[2]+")"+"><:"+"no"+">>>>"+i[3]
+		for i in user_base.users_list:
+			if i[0]!=self.username:	
+				i[1].write("change_list>>:"+self.username+">>:("+status_message+")>>:"+avatar_pic)
 				
-		if string!="populate_list":
-				for j in user_base.users_list:
-					j[1].write(string)
+		
 	elif packet[0]=="lost":
 		self.flag=1
 		self.transport.loseConnection()
