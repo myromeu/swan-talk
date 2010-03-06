@@ -466,7 +466,7 @@ def Send_Dynamic():
 	else:
 		pass
 
-current_index='CommonRoom'
+current_index='CommonRoom' #setting up initial chat flag
 
 QtCore.QObject.connect(GUI.pushButton_3,QtCore.SIGNAL("clicked()"),Send_Details)
 QtCore.QObject.connect(GUI.pushButton_2,QtCore.SIGNAL("clicked()"),Connect)
